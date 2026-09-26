@@ -966,9 +966,16 @@ export function mapRawSubjectToScheduleItem(
     subSubject = "Tăng cường Tiếng Việt";
     if (!note && clean.includes("Nhàn")) note = "GV Bộ môn: Cô Nhàn";
     const pInW = subjectPeriodInWeek || 1;
-    lessonTitle = `Luyện tập Tiếng Việt: Củng cố rèn chữ, từ và câu tuần ${week}`;
-    curriculumPeriod = `TCTV${pInW}`;
-    integrationNotes = "Rèn luyện kĩ năng đọc, viết và diễn đạt lưu loát";
+    if (gradeNum === 1) {
+      const g1 = getGradeCurriculumLesson(1, "tăng cường tiếng việt", week, pInW);
+      lessonTitle = g1.lessonTitle;
+      curriculumPeriod = g1.curriculumPeriod;
+      integrationNotes = g1.integrationNotes || "Rèn luyện kĩ năng đọc, viết và diễn đạt lưu loát";
+    } else {
+      lessonTitle = `Luyện tập Tiếng Việt: Củng cố rèn chữ, từ và câu tuần ${week}`;
+      curriculumPeriod = `TCTV${pInW}`;
+      integrationNotes = "Rèn luyện kĩ năng đọc, viết và diễn đạt lưu loát";
+    }
   }
 
   // 16. TĂNG CƯỜNG TOÁN (TCT, Luyện Toán)
@@ -986,9 +993,16 @@ export function mapRawSubjectToScheduleItem(
     if (!note && clean.includes("Phước")) note = "GV Bộ môn: Thầy Phước";
     if (!note && clean.includes("Nhàn")) note = "GV Bộ môn: Cô Nhàn";
     const pInW = subjectPeriodInWeek || 1;
-    lessonTitle = `Luyện tập thực hành Toán tuần ${week}`;
-    curriculumPeriod = `TCT${pInW}`;
-    integrationNotes = "Củng cố kĩ năng tính toán và giải toán có lời văn";
+    if (gradeNum === 1) {
+      const g1 = getGradeCurriculumLesson(1, "tăng cường toán", week, pInW);
+      lessonTitle = g1.lessonTitle;
+      curriculumPeriod = g1.curriculumPeriod;
+      integrationNotes = g1.integrationNotes || "Củng cố kĩ năng tính toán và giải toán";
+    } else {
+      lessonTitle = `Luyện tập thực hành Toán tuần ${week}`;
+      curriculumPeriod = `TCT${pInW}`;
+      integrationNotes = "Củng cố kĩ năng tính toán và giải toán có lời văn";
+    }
   }
 
   // 17. TIẾNG VIỆT CHÍNH KHÓA (TV)
@@ -1018,7 +1032,8 @@ export function mapRawSubjectToScheduleItem(
   ) {
     subject = `TOÁN ${gradeNum}`;
     const pInW = subjectPeriodInWeek || 1;
-    const info = getGradeCurriculumLesson(gradeNum, "toán", week, Math.min(pInW, 5));
+    const maxP = gradeNum === 1 ? 3 : 5;
+    const info = getGradeCurriculumLesson(gradeNum, "toán", week, Math.min(pInW, maxP));
     lessonTitle = info.lessonTitle;
     curriculumPeriod = info.curriculumPeriod;
     integrationNotes = info.integrationNotes || "";

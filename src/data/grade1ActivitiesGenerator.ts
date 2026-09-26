@@ -46,14 +46,99 @@ export function getGrade1DetailedActivities(params: {
 
   // =========================================================================
   // 1. MÔN TOÁN LỚP 1 (MATHEMATICS GRADE 1)
-  // Bám sát SGK Toán 1 (Kết nối tri thức / GDPT 2018)
+  // Bám sát SGK Toán 1 (Kết nối tri thức / GDPT 2018) & Bài học STEM
   // =========================================================================
   if (subLower.includes("toán") || subLower === "t" || subSubLower.includes("toán")) {
     const isFirstLesson = titleCore.toLowerCase().includes("tiết học đầu tiên") || titleCore.toLowerCase().includes("làm quen");
+    const isStem = titleCore.toLowerCase().includes("stem") || lessonTitle.toLowerCase().includes("stem") || (params.integrationNotes && params.integrationNotes.toLowerCase().includes("stem"));
     const isComparing = titleCore.toLowerCase().includes("nhiều hơn") || titleCore.toLowerCase().includes("ít hơn") || titleCore.toLowerCase().includes("so sánh") || titleCore.toLowerCase().includes("bằng nhau");
     const isShapes = titleCore.toLowerCase().includes("hình vuông") || titleCore.toLowerCase().includes("hình tròn") || titleCore.toLowerCase().includes("hình tam giác") || titleCore.toLowerCase().includes("hình phẳng");
     const isAddition = titleCore.toLowerCase().includes("phép cộng") || titleCore.toLowerCase().includes("cộng trong phạm vi");
     const isSubtraction = titleCore.toLowerCase().includes("phép trừ") || titleCore.toLowerCase().includes("trừ trong phạm vi");
+
+    if (isStem) {
+      const stemCompetencies = [
+        `Khoa học & Toán học (S & M): Vận dụng kiến thức toán học về đếm, cấu tạo số, so sánh, hình học hoặc phép tính để giải quyết vấn đề trong bài: "${lessonTitle}".`,
+        `Kĩ thuật & Công nghệ (T & E): Thực hành thao tác thủ công, sử dụng kéo an toàn, dán ghép vật liệu tái chế (bìa carton, giấy màu, khay trứng, que kem...) để chế tạo dụng cụ học tập trực quan.`,
+        `Phẩm chất & Năng lực chung: Phát triển năng lực giao tiếp và hợp tác nhóm, rèn đức tính kiên trì, sáng tạo và tự tin thuyết trình sản phẩm STEM của nhóm trước lớp.`
+      ];
+
+      const stemTeacherMaterials = [
+        `Kế hoạch bài dạy Bài học STEM lớp 1: ${lessonTitle}. Bài giảng điện tử trình chiếu các bước quy trình thiết kế kĩ thuật.`,
+        "Mẫu sản phẩm STEM hoàn chỉnh để học sinh quan sát đối chiếu.",
+        "Phiếu đánh giá tiêu chí sản phẩm STEM (Tính thẩm mĩ, tính ứng dụng học toán, độ chắc chắn)."
+      ];
+
+      const stemStudentMaterials = [
+        "Hộp vật liệu STEM: bìa carton cứng, giấy thủ công nhiều màu, hồ dán/băng dính 2 mặt, kéo học sinh có đầu bo tròn, bút dạ màu, thước kẻ.",
+        "Vật liệu mở rộng theo chủ đề: hạt đỗ/hạt cúc, nắp chai nhựa tái chế, que đè lưỡi (que kem gỗ), dây chun, khay đựng 10 ô.",
+        "SGK Toán 1, Vở bài tập Toán 1."
+      ];
+
+      const stemActivities: LessonActivity[] = [
+        {
+          name: "1. Khởi động - Đặt vấn đề và Thử thách STEM (5 phút)",
+          objective: "Tạo hứng thú, tiếp nhận thử thách chế tạo sản phẩm STEM hỗ trợ học Toán.",
+          teacherActivity: `• Đặt vấn đề qua câu chuyện tình huống thực tế:
+- GV chiếu hình ảnh hoặc kể câu chuyện bạn nhỏ gặp khó khăn khi đếm, so sánh hoặc tính nhẩm.
+- GV đưa ra thử thách STEM: "Hôm nay, các nhà sáng chế nhí lớp 1 sẽ cùng nhau thiết kế và chế tạo sản phẩm: ${titleCore} để giúp việc học Toán trở nên thật vui và dễ dàng!".
+• Công bố 3 tiêu chí sản phẩm:
+  1. Thể hiện đúng kiến thức toán học bài học.
+  2. Sản phẩm chắc chắn, đẹp mắt, an toàn khi sử dụng.
+  3. Dễ dàng thao tác khi học tập.`,
+          studentActivity: `• Hào hứng tiếp nhận nhiệm vụ thử thách:
+- Chăm chú theo dõi tình huống cô giáo đưa ra.
+- 2 bạn nhắc lại thử thách STEM hôm nay của lớp mình.
+- Cùng nhau vỗ tay thể hiện quyết tâm làm ra sản phẩm đẹp và sáng tạo nhất.`
+        },
+        {
+          name: "2. Nghiên cứu kiến thức nền và Đề xuất giải pháp (10 phút)",
+          objective: "Ôn tập kiến thức toán học cốt lõi và phác thảo ý tưởng thiết kế sản phẩm.",
+          teacherActivity: `• Bước 1: Ôn tập kiến thức toán học nền tảng
+- GV cho HS thao tác nhanh trên bộ que tính hoặc bảng gài để củng cố kiến thức bài học (đếm số, tách gộp số, so sánh...).
+• Bước 2: Quan sát sản phẩm mẫu và thảo luận ý tưởng
+- GV giơ sản phẩm mẫu cho HS quan sát từng bộ phận (ví dụ: khung khay 10 ô, trục so sánh, thẻ số gài...).
+- Hướng dẫn các nhóm thảo luận: "Cần những vật liệu gì? Làm bộ phận nào trước, bộ phận nào sau?".`,
+          studentActivity: `• Ôn tập và củng cố kiến thức:
+- Thao tác que tính/thẻ số theo hiệu lệnh của cô giáo, đọc to các kết quả toán học.
+• Thảo luận nhóm 4 em:
+- Quan sát sản phẩm mẫu của cô, sờ thử chất liệu bìa và giấy màu.
+- Cả nhóm thống nhất phân công: bạn vẽ khung, bạn cắt dán giấy màu, bạn gài số.`
+        },
+        {
+          name: "3. Thực hành chế tạo và Thử nghiệm sản phẩm (15 phút)",
+          objective: "Học sinh thực hành cắt dán, lắp ráp và thử nghiệm công cụ STEM vừa chế tạo.",
+          teacherActivity: `• Theo dõi và hướng dẫn kỹ năng an toàn:
+- GV nhắc nhở an toàn khi dùng kéo, nhắc HS để rác gọn gàng vào khay rác của nhóm.
+- Đi từng nhóm hỗ trợ các em còn lúng túng khi đo đạc, cắt dán.
+• Hướng dẫn thử nghiệm sản phẩm:
+- Cho các nhóm dùng thử dụng cụ vừa làm để thực hiện 1 phép tính hoặc so sánh 2 số thực tế.
+- Gợi ý điều chỉnh nếu sản phẩm chưa chắc chắn.`,
+          studentActivity: `• Tiến hành chế tạo sản phẩm theo nhóm:
+- Lấy kéo cắt các miếng bìa carton và giấy màu theo kích thước đã kẻ.
+- Dùng hồ dán gắn các chi tiết lại với nhau thành hình sản phẩm hoàn chỉnh.
+• Thử nghiệm công cụ:
+- Dùng hột hạt/que tính đặt vào sản phẩm thử đếm hoặc so sánh.
+- Kiểm tra lại theo 3 tiêu chí của cô giáo xem đã đạt yêu cầu chưa.`
+        },
+        {
+          name: "4. Trưng bày, Chia sẻ sản phẩm và Vận dụng (5 phút)",
+          objective: "Giới thiệu sản phẩm STEM của nhóm, đánh giá chéo và liên hệ thực tế.",
+          teacherActivity: `• Tổ chức trưng bày và nhận xét:
+- Mời các nhóm mang sản phẩm lên bàn trưng bày 'Góc sáng chế STEM'.
+- Mời đại diện 1-2 nhóm tự tin giới thiệu sản phẩm và thao tác biểu diễn trước lớp.
+- Nhận xét, tuyên dương tinh thần hợp tác và sự sáng tạo của học sinh.
+• Dặn dò vận dụng:
+- Dặn HS giữ gìn sản phẩm cẩn thận trong cặp để sử dụng trong các tiết học Toán tiếp theo.`,
+          studentActivity: `• Trưng bày sản phẩm của nhóm:
+- Đặt sản phẩm lên bàn trưng bày, cùng các bạn đi quanh quan sát và vỗ tay khen ngợi nhau.
+- Đại diện nhóm tự tin nói: "Đây là sản phẩm của nhóm em, chúng em dùng bìa và giấy màu để làm rất chắc chắn ạ!".
+- Dọn dẹp sạch sẽ vụn giấy trên mặt bàn cho vào sọt rác.`
+        }
+      ];
+
+      return { specificCompetencies: stemCompetencies, teacherMaterials: stemTeacherMaterials, studentMaterials: stemStudentMaterials, activities: stemActivities };
+    }
 
     const specificCompetencies = [
       `Học sinh nhận biết, đếm, đọc và viết đúng các số hoặc hình học trong bài: "${lessonTitle}".`,
@@ -517,9 +602,79 @@ export function getGrade1DetailedActivities(params: {
 
   // =========================================================================
   // 3. MÔN TỰ NHIÊN VÀ XÃ HỘI LỚP 1 (TNXH 1)
-  // Bám sát tranh ảnh và tình huống trong SGK Tự nhiên và Xã hội 1
+  // Bám sát tranh ảnh và tình huống trong SGK Tự nhiên và Xã hội 1 & Bài học STEM
   // =========================================================================
   if (subLower.includes("tự nhiên") || subLower.includes("tnxh") || subLower === "tn&xh") {
+    const isStem = titleCore.toLowerCase().includes("stem") || lessonTitle.toLowerCase().includes("stem") || (params.integrationNotes && params.integrationNotes.toLowerCase().includes("stem"));
+
+    if (isStem) {
+      const stemCompetencies = [
+        `Khoa học (S): Vận dụng kiến thức tự nhiên về cây cối, con vật nuôi hoặc bầu trời để giải thích hiện tượng và chế tạo sản phẩm trong bài: "${lessonTitle}".`,
+        `Kĩ thuật, Công nghệ & Mĩ thuật (T, E, A): Sử dụng lá cây rụng, bìa giấy tái chế, màu sáp để cắt dán mô hình học tập trực quan an toàn.`,
+        `Năng lực giải quyết vấn đề và sáng tạo: Hợp tác tích cực với bạn trong nhóm, rèn luyện tình yêu thiên nhiên, ý thức bảo vệ môi trường và động vật.`
+      ];
+
+      const stemTeacherMaterials = [
+        `Kế hoạch bài dạy Bài học STEM TNXH 1: ${lessonTitle}. Trình chiếu video clip hướng dẫn quy trình tạo mô hình.`,
+        "Sản phẩm mẫu của giáo viên (Mô hình cây xanh, mô hình bầu trời ngày và đêm, bảng chăm sóc vật nuôi).",
+        "Phiếu tiêu chí đánh giá sản phẩm STEM."
+      ];
+
+      const stemStudentMaterials = [
+        "Vật liệu tự nhiên & tái chế: lá cây ép khô, cành cây nhỏ, bìa carton, bông gòn, giấy màu, que kem.",
+        "Dụng cụ thủ công: kéo học sinh, hồ dán/keo hai mặt, bút màu sáp, khăn lau tay.",
+        "SGK Tự nhiên và Xã hội 1, VBT Tự nhiên và Xã hội 1."
+      ];
+
+      const stemActivities: LessonActivity[] = [
+        {
+          name: "1. Khởi động - Đặt vấn đề và Thử thách STEM (5 phút)",
+          objective: "Tạo cảm xúc yêu thiên nhiên, tiếp nhận thử thách thiết kế mô hình STEM.",
+          teacherActivity: `• Dẫn dắt qua bài hát hoặc câu đố về thiên nhiên:
+- GV chiếu hình ảnh hoặc cho cả lớp hát bài hát về cây cối, động vật hoặc bầu trời.
+- Đặt câu hỏi thử thách: "Làm thế nào để chúng ta lưu giữ vẻ đẹp của thiên nhiên và giúp các bạn dễ dàng tìm hiểu bài học?".
+- Giới thiệu thử thách STEM hôm nay: ${titleCore}.`,
+          studentActivity: `• Hào hứng hưởng ứng thử thách:
+- Cả lớp cùng hát và trả lời câu đố về cây cối, các con vật hoặc Mặt Trời, Mặt Trăng.
+- Nhận nhiệm vụ sáng tạo mô hình STEM cùng nhóm bạn.`
+        },
+        {
+          name: "2. Nghiên cứu kiến thức nền và Phác thảo ý tưởng (10 phút)",
+          objective: "Quan sát tranh SGK TNXH 1, đối chiếu các bộ phận và lên ý tưởng chế tạo.",
+          teacherActivity: `• Hướng dẫn quan sát tranh SGK và sản phẩm mẫu:
+- Cho HS nhắc lại đặc điểm các bộ phận của cây (rễ, thân, lá, hoa), của vật nuôi hoặc hiện tượng ngày/đêm.
+- Hướng dẫn các nhóm phác thảo ý tưởng: chọn vật liệu gì, dán như thế nào cho đẹp và chắc chắn.`,
+          studentActivity: `• Quan sát tranh SGK và sản phẩm mẫu:
+- Chỉ tranh và nêu to các bộ phận của cây hoặc con vật.
+- Các bạn trong nhóm thảo luận, chia sẻ lá cây, bông gòn, giấy màu mang theo.`
+        },
+        {
+          name: "3. Thực hành chế tạo và Hoàn thiện mô hình (15 phút)",
+          objective: "Học sinh thực hành cắt dán, tạo hình sản phẩm STEM sáng tạo.",
+          teacherActivity: `• Theo dõi, hỗ trợ thao tác thủ công:
+- GV đến từng nhóm quan sát, hướng dẫn các em bôi hồ vừa phải, dùng kéo an toàn.
+- Khích lệ sự sáng tạo độc đáo của từng nhóm học sinh.`,
+          studentActivity: `• Thực hành ghép nối và tạo hình:
+- Cắt dán bìa nền, đính lá cây khô hoặc vẽ thêm các chi tiết sinh động.
+- Gắn thẻ ghi chú tên sản phẩm và tên các thành viên trong nhóm.`
+        },
+        {
+          name: "4. Trưng bày, Chia sẻ và Đánh giá (5 phút)",
+          objective: "Báo cáo sản phẩm, bày tỏ cảm xúc và liên hệ bảo vệ thiên nhiên.",
+          teacherActivity: `• Tổ chức triển lãm 'Khu vườn sáng tạo STEM':
+- Mời các nhóm trưng bày sản phẩm quanh lớp học.
+- Cho học sinh bình chọn sản phẩm mình yêu thích nhất bằng sticker trái tim.
+- Tổng kết khen ngợi và dặn dò bảo vệ môi trường, yêu quý thiên nhiên.`,
+          studentActivity: `• Triển lãm và chia sẻ:
+- Tự hào dán sản phẩm lên góc trưng bày của lớp.
+- Đi một vòng quan sát sản phẩm của các nhóm bạn và vỗ tay tán thưởng.
+- Dọn dẹp góc học tập sạch sẽ, rửa tay sạch sau khi dán keo.`
+        }
+      ];
+
+      return { specificCompetencies: stemCompetencies, teacherMaterials: stemTeacherMaterials, studentMaterials: stemStudentMaterials, activities: stemActivities };
+    }
+
     const specificCompetencies = [
       `Học sinh quan sát tranh ảnh trong SGK TNXH 1, nhận biết và nêu được nội dung trọng tâm bài: "${lessonTitle}".`,
       `Biết chỉ tranh, kể tên và trả lời các câu hỏi khám phá trong SGK; phân biệt việc nên làm và không nên làm gắn với đời sống hàng ngày.`,

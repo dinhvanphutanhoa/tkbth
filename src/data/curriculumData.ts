@@ -733,23 +733,26 @@ export function generateFullWeekLessonPlans(
           humanRights: "Human Rights Education: Foster respect, inclusion, gender equality, and respectful cultural exchange.",
           stem: "Play-based Learning & STEM: Reinforce vocabulary and communicative reflexes through energetic language games and role-play."
         } : {
-          ai: item.integrationNotes?.includes("AI") 
-            ? (item.integrationNotes.split("|").find(s => s.includes("AI"))?.trim() || "Tích hợp AI: Làm quen ứng dụng công nghệ trí tuệ nhân tạo hỗ trợ học tập.")
+          ai: (item.integrationNotes?.includes("AI") || item.integrationNotes?.toLowerCase().includes("trí tuệ nhân tạo"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("AI") || s.toLowerCase().includes("trí tuệ nhân tạo"))?.trim() || "Tích hợp AI: Làm quen ứng dụng công nghệ trí tuệ nhân tạo hỗ trợ học tập.")
             : undefined,
-          digitalCompetence: item.integrationNotes?.includes("NLS") 
-            ? (item.integrationNotes.split("|").find(s => s.includes("NLS"))?.trim() || "Tích hợp Năng lực số (CV 3456/BGDĐT-GDTH): Khám phá và sử dụng công nghệ số an toàn.")
+          digitalCompetence: (item.integrationNotes?.includes("NLS") || item.integrationNotes?.toLowerCase().includes("năng lực số") || item.integrationNotes?.includes("CDS") || item.integrationNotes?.toLowerCase().includes("chuyển đổi số"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("NLS") || s.toLowerCase().includes("năng lực số") || s.includes("CDS") || s.toLowerCase().includes("chuyển đổi số"))?.trim() || "Tích hợp Năng lực số (CV 3456/BGDĐT-GDTH): Khám phá và sử dụng công nghệ số an toàn.")
             : undefined,
-          humanRights: item.integrationNotes?.includes("QCN") 
-            ? (item.integrationNotes.split("|").find(s => s.includes("QCN"))?.trim() || "Giáo dục quyền trẻ em (QCN): Tôn trọng sự khác biệt, bình đẳng và an toàn thân thể.")
+          humanRights: (item.integrationNotes?.includes("QCN") || item.integrationNotes?.toLowerCase().includes("quyền con người") || item.integrationNotes?.toLowerCase().includes("quyền trẻ em"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("QCN") || s.toLowerCase().includes("quyền con người") || s.toLowerCase().includes("quyền trẻ em"))?.trim() || "Giáo dục quyền trẻ em (QCN): Tôn trọng sự khác biệt, bình đẳng và an toàn thân thể.")
             : undefined,
-          defense: (item.integrationNotes?.includes("GDQPAN") || item.integrationNotes?.includes("quốc phòng")) 
-            ? (item.integrationNotes.split("|").find(s => s.includes("GDQPAN") || s.includes("quốc phòng"))?.trim() || "Lồng ghép GDQPAN (TT 08/2024): Tự hào truyền thống yêu nước, ý thức bảo vệ chủ quyền quê hương.")
+          defense: (item.integrationNotes?.includes("GDQPAN") || item.integrationNotes?.includes("QPAN") || item.integrationNotes?.toLowerCase().includes("quốc phòng") || item.integrationNotes?.toLowerCase().includes("an ninh"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("GDQPAN") || s.includes("QPAN") || s.toLowerCase().includes("quốc phòng") || s.toLowerCase().includes("an ninh"))?.trim() || "Lồng ghép GDQPAN (TT 08/2024): Tự hào truyền thống yêu nước, ý thức bảo vệ chủ quyền quê hương.")
             : undefined,
-          nutrition: item.integrationNotes?.includes("GDDD") 
-            ? (item.integrationNotes.split("|").find(s => s.includes("GDDD"))?.trim() || "Giáo dục Dinh dưỡng học đường (GDDD): Lựa chọn thực phẩm lành mạnh, giữ gìn sức khỏe.")
+          nutrition: (item.integrationNotes?.includes("GDDD") || item.integrationNotes?.toLowerCase().includes("dinh dưỡng"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("GDDD") || s.toLowerCase().includes("dinh dưỡng"))?.trim() || "Giáo dục Dinh dưỡng học đường (GDDD): Lựa chọn thực phẩm lành mạnh, giữ gìn sức khỏe.")
             : undefined,
-          stem: item.integrationNotes?.includes("STEM") 
-            ? (item.integrationNotes.split("|").find(s => s.includes("STEM"))?.trim() || "Giáo dục STEM / Học thông qua chơi: Vận dụng kiến thức liên môn giải quyết vấn đề thực tiễn.")
+          stem: (item.integrationNotes?.includes("STEM") || item.lessonTitle?.includes("STEM") || item.integrationNotes?.toLowerCase().includes("stem"))
+            ? (item.integrationNotes.split("|").find(s => s.toUpperCase().includes("STEM"))?.trim() || "Giáo dục STEM / Học thông qua chơi: Vận dụng kiến thức liên môn giải quyết vấn đề thực tiễn.")
+            : undefined,
+          environment: (item.integrationNotes?.includes("BVMT") || item.integrationNotes?.toLowerCase().includes("môi trường"))
+            ? (item.integrationNotes.split("|").find(s => s.includes("BVMT") || s.toLowerCase().includes("môi trường"))?.trim() || "Giáo dục Bảo vệ môi trường: Giữ gìn vệ sinh, yêu quý và bảo vệ cảnh quan thiên nhiên.")
             : undefined,
         }
       },
