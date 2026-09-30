@@ -539,6 +539,13 @@ export function generateScheduleForClass(
       const slotRow = master.slots[key] || {};
       const subjectRaw = (
         slotRow[targetClass] ||
+        (targetClass === "1.1" ? (slotRow["1.1"] || slotRow["1A"]) : targetClass === "1A" ? (slotRow["1.1"] || slotRow["1A"]) : "") ||
+        (targetClass === "1.2" ? (slotRow["1.2"] || slotRow["1B"]) : targetClass === "1B" ? (slotRow["1.2"] || slotRow["1B"]) : "") ||
+        (targetClass === "2" ? (slotRow["2"] || slotRow["2A"]) : targetClass === "2A" ? (slotRow["2"] || slotRow["2A"]) : "") ||
+        (targetClass === "3" ? (slotRow["3"] || slotRow["3A"]) : targetClass === "3A" ? (slotRow["3"] || slotRow["3A"]) : "") ||
+        (targetClass === "4.1" ? (slotRow["4.1"] || slotRow["4A"]) : targetClass === "4A" ? (slotRow["4.1"] || slotRow["4A"]) : "") ||
+        (targetClass === "4.2" ? (slotRow["4.2"] || slotRow["4B"]) : targetClass === "4B" ? (slotRow["4.2"] || slotRow["4B"]) : "") ||
+        (targetClass === "5" ? (slotRow["5"] || slotRow["5A"]) : targetClass === "5A" ? (slotRow["5"] || slotRow["5A"]) : "") ||
         slotRow[targetClass.toUpperCase()] ||
         slotRow[targetClass.toLowerCase()] ||
         ""
@@ -570,6 +577,13 @@ export function generateScheduleForClass(
       const slotRow = master.slots[key] || {};
       const subjectRaw = (
         slotRow[targetClass] ||
+        (targetClass === "1.1" ? (slotRow["1.1"] || slotRow["1A"]) : targetClass === "1A" ? (slotRow["1.1"] || slotRow["1A"]) : "") ||
+        (targetClass === "1.2" ? (slotRow["1.2"] || slotRow["1B"]) : targetClass === "1B" ? (slotRow["1.2"] || slotRow["1B"]) : "") ||
+        (targetClass === "2" ? (slotRow["2"] || slotRow["2A"]) : targetClass === "2A" ? (slotRow["2"] || slotRow["2A"]) : "") ||
+        (targetClass === "3" ? (slotRow["3"] || slotRow["3A"]) : targetClass === "3A" ? (slotRow["3"] || slotRow["3A"]) : "") ||
+        (targetClass === "4.1" ? (slotRow["4.1"] || slotRow["4A"]) : targetClass === "4A" ? (slotRow["4.1"] || slotRow["4A"]) : "") ||
+        (targetClass === "4.2" ? (slotRow["4.2"] || slotRow["4B"]) : targetClass === "4B" ? (slotRow["4.2"] || slotRow["4B"]) : "") ||
+        (targetClass === "5" ? (slotRow["5"] || slotRow["5A"]) : targetClass === "5A" ? (slotRow["5"] || slotRow["5A"]) : "") ||
         slotRow[targetClass.toUpperCase()] ||
         slotRow[targetClass.toLowerCase()] ||
         ""

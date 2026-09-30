@@ -64,15 +64,14 @@ export function getGrade1DetailedActivities(params: {
       ];
 
       const stemTeacherMaterials = [
-        `Kế hoạch bài dạy Bài học STEM lớp 1: ${lessonTitle}. Bài giảng điện tử trình chiếu các bước quy trình thiết kế kĩ thuật.`,
-        "Mẫu sản phẩm STEM hoàn chỉnh để học sinh quan sát đối chiếu.",
+        `Màn hình thông minh/máy chiếu trình chiếu các bước quy trình thiết kế kĩ thuật bài: ${lessonTitle}.`,
+        "Mẫu sản phẩm STEM hoàn chỉnh của giáo viên để học sinh quan sát đối chiếu.",
         "Phiếu đánh giá tiêu chí sản phẩm STEM (Tính thẩm mĩ, tính ứng dụng học toán, độ chắc chắn)."
       ];
 
       const stemStudentMaterials = [
-        "Hộp vật liệu STEM: bìa carton cứng, giấy thủ công nhiều màu, hồ dán/băng dính 2 mặt, kéo học sinh có đầu bo tròn, bút dạ màu, thước kẻ.",
-        "Vật liệu mở rộng theo chủ đề: hạt đỗ/hạt cúc, nắp chai nhựa tái chế, que đè lưỡi (que kem gỗ), dây chun, khay đựng 10 ô.",
-        "SGK Toán 1, Vở bài tập Toán 1."
+        "Hộp vật liệu STEM: bìa carton cứng, giấy thủ công nhiều màu, hồ dán/băng dính 2 mặt, kéo học sinh có đầu bo tròn, thước kẻ.",
+        "Vật liệu tái chế: nắp chai nhựa sạch, que đè lưỡi (que kem gỗ), dây chun, khay đựng chia ô, phiếu ghi chép ý tưởng nhóm."
       ];
 
       const stemActivities: LessonActivity[] = [
@@ -147,15 +146,14 @@ export function getGrade1DetailedActivities(params: {
     ];
 
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử tương tác minh họa tranh SGK Toán 1 bài: ${lessonTitle}.`,
-      "Bộ đồ dùng dạy Toán 1 của GV: que tính to, bảng gài số, các mô hình khối lập phương, thẻ số từ 0 đến 10, tranh phóng to các bài tập trong SGK.",
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử tương tác minh họa tranh bài: ${lessonTitle}.`,
+      "Bộ đồ dùng dạy Toán 1 của GV: que tính to, bảng gài số, các mô hình khối lập phương, thẻ số từ 0 đến 10, tranh phóng to các bài tập.",
       "Phiếu bài tập mở rộng, phần thưởng bông hoa điểm tốt khích lệ học sinh."
     ];
 
     const studentMaterials = [
-      "Sách giáo khoa Toán 1 (Bộ Kết nối tri thức với cuộc sống), Vở bài tập Toán 1 tập 1.",
-      "Bộ đồ dùng học Toán 1 của học sinh: hộp que tính, bảng gài, các thẻ số 0-10, các hình phẳng (hình vuông, tròn, tam giác, chữ nhật), khối lập phương nhỏ.",
-      "Bảng con, phấn trắng, khăn lau bảng, bút chì, tẩy gôm."
+      "Hộp que tính, bảng gài cá nhân, các thẻ số 0-10, các hình phẳng (hình vuông, tròn, tam giác, chữ nhật), khối lập phương nhỏ trong bộ đồ dùng thực hành Toán.",
+      "Phiếu học tập thực hành đếm và thao tác số."
     ];
 
     let act2Teacher = "";
@@ -371,15 +369,14 @@ export function getGrade1DetailedActivities(params: {
     ];
 
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX) phóng to các tranh khởi động, tranh từ ngữ ứng dụng trong SGK Tiếng Việt 1.`,
-      "Bộ chữ biểu diễn của giáo viên (thẻ chữ in hoa, in thường, chữ viết mẫu phóng to 4 ô ly trên bảng phụ), bảng gài lớp.",
-      "Vở Tập viết 1, que chỉ bảng, phần thưởng ngôi sao chăm chỉ."
+      `Màn hình tương tác/máy chiếu trình chiếu bài giảng điện tử phóng to tranh khởi động, video mô phỏng nét viết chữ mẫu bài "${titleCore}".`,
+      "Bộ chữ biểu diễn của giáo viên (thẻ chữ in hoa, in thường, chữ viết mẫu phóng to 4 ô ly trên bảng phụ), bảng gài lớn.",
+      "Que chỉ bảng, phần thưởng ngôi sao chăm chỉ."
     ];
 
     const studentMaterials = [
-      "Sách giáo khoa Tiếng Việt 1 (Tập 1), Vở Tập viết 1 (Tập 1), Vở bài tập Tiếng Việt 1.",
-      "Bộ đồ dùng học Tiếng Việt 1 của học sinh: Bảng gài cá nhân, hộp thẻ chữ cái và dấu thanh.",
-      "Bảng con có kẻ ô ly tiểu học, phấn trắng, khăn lau bảng ẩm, bút chì 2B, tẩy gôm."
+      "Bảng gài cá nhân, hộp thẻ chữ cái và dấu thanh phục vụ ghép tiếng/từ mới.",
+      "Phiếu học tập rèn kĩ năng đọc trơn và mở rộng vốn từ theo chủ đề bài học."
     ];
 
     let act1Teacher = "";
@@ -615,15 +612,14 @@ export function getGrade1DetailedActivities(params: {
       ];
 
       const stemTeacherMaterials = [
-        `Kế hoạch bài dạy Bài học STEM TNXH 1: ${lessonTitle}. Trình chiếu video clip hướng dẫn quy trình tạo mô hình.`,
+        `Màn hình thông minh/máy chiếu trình chiếu video clip hướng dẫn quy trình tạo mô hình STEM bài: ${lessonTitle}.`,
         "Sản phẩm mẫu của giáo viên (Mô hình cây xanh, mô hình bầu trời ngày và đêm, bảng chăm sóc vật nuôi).",
         "Phiếu tiêu chí đánh giá sản phẩm STEM."
       ];
 
       const stemStudentMaterials = [
         "Vật liệu tự nhiên & tái chế: lá cây ép khô, cành cây nhỏ, bìa carton, bông gòn, giấy màu, que kem.",
-        "Dụng cụ thủ công: kéo học sinh, hồ dán/keo hai mặt, bút màu sáp, khăn lau tay.",
-        "SGK Tự nhiên và Xã hội 1, VBT Tự nhiên và Xã hội 1."
+        "Dụng cụ thủ công: kéo học sinh an toàn, hồ dán/keo hai mặt, khăn lau tay, phiếu ghi chép ý tưởng nhóm."
       ];
 
       const stemActivities: LessonActivity[] = [
@@ -682,14 +678,14 @@ export function getGrade1DetailedActivities(params: {
     ];
 
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX) phóng to các bức tranh 1, 2, 3, 4 trong SGK Tự nhiên và Xã hội 1.`,
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử phóng to các bức tranh tình huống bài "${titleCore}".`,
       "Thẻ mặt cười (việc nên làm), thẻ mặt mếu (việc không nên làm) phục vụ trò chơi bày tỏ ý kiến.",
       "Video ngắn hoặc bài hát chủ đề gần gũi với học sinh lớp 1."
     ];
 
     const studentMaterials = [
-      "Sách giáo khoa Tự nhiên và Xã hội 1 (Bộ Kết nối tri thức với cuộc sống), Vở bài tập TNXH 1.",
-      "Thẻ hoa xanh/đỏ hoặc thẻ mặt cười/mặt mếu, bút chì màu."
+      "Thẻ hoa xanh/đỏ hoặc thẻ mặt cười/mặt mếu cá nhân, tranh ảnh hoặc đồ vật thật mang đến lớp theo chủ đề.",
+      "Phiếu học tập quan sát nhận biết việc nên làm và không nên làm."
     ];
 
     const activities: LessonActivity[] = [
@@ -786,14 +782,13 @@ export function getGrade1DetailedActivities(params: {
     ];
 
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử minh họa các tranh truyện và tình huống trong SGK Đạo đức 1.`,
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử minh họa các tranh truyện và video tình huống bài "${titleCore}".`,
       "Thẻ xanh (tán thành), thẻ đỏ (không tán thành); bộ tranh các bước vệ sinh cá nhân hoặc quy tắc ứng xử.",
       "Bảng khen thưởng 'Bé ngoan lớp 1'."
     ];
 
     const studentMaterials = [
-      "Sách giáo khoa Đạo đức 1 (Bộ Kết nối tri thức với cuộc sống), Vở bài tập Đạo đức 1.",
-      "Thẻ hoa xanh/đỏ hoặc thẻ mặt cười/mặt mếu cá nhân."
+      "Thẻ hoa xanh/đỏ hoặc thẻ mặt cười/mặt mếu cá nhân dùng để bày tỏ ý kiến, phiếu tự liên hệ việc làm tốt."
     ];
 
     const activities: LessonActivity[] = [
@@ -880,8 +875,7 @@ export function getGrade1DetailedActivities(params: {
         "Rèn luyện tính kỷ luật, xếp hàng ngay ngắn, giữ trật tự và lòng tự hào về trường lớp tiểu học."
       ];
       const teacherMaterials = [
-        "Kế hoạch tổ chức tiết Sinh hoạt dưới cờ, sổ theo dõi nền nếp lớp 1, bài phát động thi đua tuần mới.",
-        "Trang phục chỉnh tề, phối hợp Tổng phụ trách Đội điều hành học sinh khối 1."
+        "Hệ thống âm thanh, micro, cờ Tổ quốc, bục điều hành nghi lễ Chào cờ, kế hoạch phát động phong trào thi đua tuần mới."
       ];
       const studentMaterials = [
         "Trang phục học sinh sạch đẹp, đồng phục trường, mũ/nón, ghế ngồi cá nhân (nếu có)."
@@ -944,14 +938,12 @@ export function getGrade1DetailedActivities(params: {
         "Rèn luyện kỹ năng tự quản, biết lắng nghe cô giáo và các bạn nhận xét, cùng nhau xây dựng tập thể lớp 1 thân thiện và chấp hành tốt các quy định an toàn giao thông."
       ];
       const teacherMaterials = [
-        "Sổ theo dõi chủ nhiệm lớp 1, bảng hoa điểm 10 của các tổ, kế hoạch hoạt động tuần tới.",
-        `Tài liệu Giáo dục An toàn giao thông Lớp 1 (Bài ${tsLesson.lessonNumber}: ${tsLesson.title} - Tiết ${tsLesson.part}).`,
-        "Tranh ảnh, video clip minh họa an toàn giao thông cho học sinh lớp 1.",
+        "Màn hình thông minh/máy chiếu trình chiếu video clip tình huống an toàn giao thông và tổng kết tuần học.",
+        `Tài liệu Giáo dục An toàn giao thông Lớp 1 (Bài ${tsLesson.lessonNumber}: ${tsLesson.title} - Tiết ${tsLesson.part}), tranh ảnh tình huống giao thông thực tế.`,
         "Phần thưởng sticker/hoa khen thưởng cho các học sinh tiến bộ."
       ];
       const studentMaterials = [
-        "Sổ tay theo dõi bé ngoan, góc trưng bày sản phẩm học tập trong tuần.",
-        "Tài liệu Giáo dục An toàn giao thông Lớp 1."
+        "Sổ tay theo dõi bé ngoan, góc trưng bày sản phẩm học tập trong tuần, thẻ mục tiêu tuần mới."
       ];
 
       const activities: LessonActivity[] = [
@@ -1013,13 +1005,12 @@ export function getGrade1DetailedActivities(params: {
       "Hình thành kỹ năng tự phục vụ, giao tiếp cởi mở và hợp tác thân thiện với bạn bè."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử minh họa các hoạt động trong SGK Hoạt động trải nghiệm 1.`,
-      "Vật liệu trải nghiệm đơn giản: giấy màu, hồ dán, kéo an toàn, bút chì màu.",
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử minh họa các hoạt động bài "${titleCore}".`,
+      "Vật liệu trải nghiệm mẫu: giấy màu, hồ dán, kéo an toàn, cây thông điệp hoặc bảng gài sản phẩm.",
       "Phiếu đánh giá hoạt động trải nghiệm lớp 1."
     ];
     const studentMaterials = [
-      "Sách giáo khoa Hoạt động trải nghiệm 1, Vở bài tập HĐTN 1.",
-      "Hộp bút màu, giấy thủ công, kéo cắt giấy đầu tròn an toàn."
+      "Hộp màu vẽ, giấy thủ công, kéo cắt giấy đầu tròn an toàn, hồ dán, thẻ cảm xúc."
     ];
 
     const activities: LessonActivity[] = [
@@ -1080,11 +1071,11 @@ export function getGrade1DetailedActivities(params: {
       "Hình thành thói quen rèn luyện thân thể, giữ vệ sinh sân tập và an toàn trong tập luyện."
     ];
     const teacherMaterials = [
-      "Kế hoạch bài dạy, còi chỉ huy, tranh phóng to các động tác mẫu trong SGK Giáo dục thể chất 1.",
-      "Sân tập sạch sẽ, an toàn, bóng thể thao hoặc cờ nheo phục vụ trò chơi vận động."
+      "Còi chỉ huy, tranh phóng to các động tác kỹ thuật mẫu, sân tập sạch sẽ, bằng phẳng, an toàn.",
+      "Bóng thể thao hoặc cờ nheo phục vụ trò chơi vận động."
     ];
     const studentMaterials = [
-      "Trang phục thể thao thoáng mát, đi giày bata hoặc giày thể thao sạch sẽ."
+      "Trang phục thể thao gọn gàng, thoáng mát, đi giày bata hoặc giày thể thao sạch sẽ, bình nước uống cá nhân."
     ];
 
     const activities: LessonActivity[] = [
@@ -1150,14 +1141,15 @@ export function getGrade1DetailedActivities(params: {
   // Default fallback for any other specialist subject in Grade 1
   return {
     specificCompetencies: [
-      `Học sinh tiếp thu tốt kiến thức và kỹ năng trong bài học SGK: "${lessonTitle}".`,
-      "Thao tác thuần thục với sách giáo khoa và đồ dùng học tập, phát triển năng lực đặc thù môn học."
+      `Học sinh tiếp thu tốt kiến thức và kỹ năng trong bài học: "${lessonTitle}".`,
+      "Thao tác thuần thục với đồ dùng trực quan, phát triển năng lực đặc thù môn học."
     ],
     teacherMaterials: [
-      `Kế hoạch bài dạy, giáo cụ trực quan minh họa bài học "${lessonTitle}".`
+      `Màn hình trình chiếu bài giảng điện tử tương tác, giáo cụ trực quan minh họa bài học "${lessonTitle}".`,
+      "Phiếu học tập thực hành và phần thưởng khích lệ học sinh."
     ],
     studentMaterials: [
-      `Sách giáo khoa, vở bài tập và đồ dùng học tập môn ${subject}.`
+      `Phiếu học tập thực hành môn ${subject}, đồ dùng trực quan cá nhân phục vụ thực hành bài học "${lessonTitle}".`
     ],
     activities: [
       {

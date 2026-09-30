@@ -814,15 +814,14 @@ export function getDetailedEnglishLesson(
   ];
 
   const teacherMaterials = [
-    `Teacher's Guide and Lesson Plan for Grade ${grade} English following official MOET standards.`,
     `Set of high-definition digital and physical flashcards for target vocabulary: ${rawWordsList}.`,
     `Authentic native audio recordings, interactive multimedia slides (PowerPoint/Canva), and visual charts for '${matchedUnit.theme}'.`,
     `Interactive flat panel / Smart TV, projector, external audio speaker, board magnets, and word strip cards.`
   ];
 
   const studentMaterials = [
-    `Grade ${grade} English Student's Book, workbook, vocabulary notebook, pens, pencils, and colored markers.`,
-    `Individual mini word cards and character role-play badges for interactive pair-work and team games.`
+    `Individual mini word cards and character role-play badges for interactive pair-work and team games.`,
+    `Speaking worksheet and activity cut-outs for '${matchedUnit.theme}'.`
   ];
 
   const integrationNotes = `Digital Competence: Utilize digital flashcards, interactive multimedia slides, and authentic native audio tracks | AI Competence: Introduce voice-recognition pronunciation modeling and virtual language prompts | Play-based Learning: Reinforce language through the interactive game '${matchedUnit.game}'.`;

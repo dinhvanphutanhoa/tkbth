@@ -475,8 +475,8 @@ export function getDetailedMusicLesson(
     ];
 
     const studentMaterials = [
-      `Sách giáo khoa Âm nhạc Lớp ${grade}, vở bài tập âm nhạc, đồ dùng học tập.`,
-      "Thanh phách gõ (mỗi học sinh 1 cặp), trang phục gọn gàng, tâm thế thoải mái."
+      "Thanh phách gõ (mỗi học sinh 1 cặp), nhạc cụ gõ tự chọn của tổ (song loan, tambourine, trống nhỏ).",
+      "Trang phục gọn gàng, sẵn sàng vận động phụ họa cơ thể."
     ];
 
     const integrationNotes = `Tích hợp Giáo dục Tình yêu Quê hương Đất nước & Giáo dục thẩm mỹ âm nhạc (${song.mainTheme}).`;

@@ -19,6 +19,7 @@ import { DAYS_OF_WEEK, DEFAULT_TEACHERS, isSlotMatchingTeacherOrSubject, getWeek
 import { cleanLessonTitle, formatActivityName } from "./lessonTitleHelper";
 import JSZip from "jszip";
 import { getScheduleAndPlansForTeacher } from "./teacherScheduleHelper";
+import { sanitizeLessonMaterials } from "../data/curriculumData";
 
 /**
  * Universal robust file download helper for Web & sandboxed iFrame environments
@@ -1633,13 +1634,20 @@ export function buildSingleLessonPlanDocxElements(
     );
   }
 
-  // Section II: Materials
+  // Section II: Materials (Chuẩn CV 2345/BGDĐT)
+  const sanitizedMats = sanitizeLessonMaterials(
+    plan.materials,
+    plan.subject,
+    plan.lessonTitle,
+    plan.grade
+  );
+
   elements.push(
     new Paragraph({
       spacing: { before: 40, after: 20 },
       children: [
         new TextRun({
-          text: isEnPlan ? "II. TEACHING AIDS AND LEARNING MATERIALS" : "II. ĐỒ DÙNG DẠY HỌC",
+          text: isEnPlan ? "II. TEACHING AIDS AND LEARNING MATERIALS" : "II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU",
           bold: true,
           color: "0F172A",
           font,
@@ -1659,7 +1667,7 @@ export function buildSingleLessonPlanDocxElements(
           size: baseSize,
         }),
         new TextRun({
-          text: plan.materials.teacher.join("; "),
+          text: sanitizedMats.teacher.join("; "),
           font,
           size: baseSize,
         }),
@@ -1677,7 +1685,7 @@ export function buildSingleLessonPlanDocxElements(
           size: baseSize,
         }),
         new TextRun({
-          text: plan.materials.student.join("; "),
+          text: sanitizedMats.student.join("; "),
           font,
           size: baseSize,
         }),
@@ -2425,11 +2433,18 @@ export async function exportCombinedAllInOneDocx(
       }
     }
 
-    // II. Đồ dùng
+    // II. Thiết bị dạy học và học liệu (Chuẩn CV 2345/BGDĐT)
+    const singleSanitizedMats = sanitizeLessonMaterials(
+      plan.materials,
+      plan.subject,
+      plan.lessonTitle,
+      plan.grade
+    );
+
     docChildren.push(
       new Paragraph({
         spacing: { before: 40, after: 20 },
-        children: [new TextRun({ text: isEnPlan ? "II. TEACHING AIDS AND LEARNING MATERIALS" : "II. ĐỒ DÙNG DẠY HỌC", bold: true, font, size: baseSize })],
+        children: [new TextRun({ text: isEnPlan ? "II. TEACHING AIDS AND LEARNING MATERIALS" : "II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU", bold: true, font, size: baseSize })],
       })
     );
     docChildren.push(
@@ -2437,7 +2452,7 @@ export async function exportCombinedAllInOneDocx(
         spacing: { after: 20 },
         children: [
           new TextRun({ text: isEnPlan ? "- Teacher's materials: " : "- Giáo viên: ", bold: true, font, size: baseSize }),
-          new TextRun({ text: plan.materials.teacher.join("; "), font, size: baseSize }),
+          new TextRun({ text: singleSanitizedMats.teacher.join("; "), font, size: baseSize }),
         ],
       })
     );
@@ -2446,7 +2461,7 @@ export async function exportCombinedAllInOneDocx(
         spacing: { after: 30 },
         children: [
           new TextRun({ text: isEnPlan ? "- Students' materials: " : "- Học sinh: ", bold: true, font, size: baseSize }),
-          new TextRun({ text: plan.materials.student.join("; "), font, size: baseSize }),
+          new TextRun({ text: singleSanitizedMats.student.join("; "), font, size: baseSize }),
         ],
       })
     );

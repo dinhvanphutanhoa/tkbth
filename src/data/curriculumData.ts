@@ -235,8 +235,8 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
       }
     },
     materials: {
-      teacher: ["Sách giáo khoa, máy chiếu trình chiếu bài thơ, tranh ảnh minh họa hạt nảy mầm."],
-      student: ["Sách giáo khoa Tiếng Việt 5, vở ghi bài."]
+      teacher: ["Máy chiếu trình chiếu bài thơ, tranh ảnh minh họa hạt nảy mầm."],
+      student: ["Tư liệu và tranh ảnh về sự phát triển của cây non sưu tầm."]
     },
     activities: [
       {
@@ -294,7 +294,7 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
     },
     materials: {
       teacher: ["Phiếu bài tập nhóm, bảng phụ ghi các đoạn văn mẫu."],
-      student: ["Vở bài tập Tiếng Việt 5, bút."]
+      student: ["Phiếu học tập cá nhân phân biệt đại từ."]
     },
     activities: [
       {
@@ -349,8 +349,8 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
       }
     },
     materials: {
-      teacher: ["Bộ đồ dùng dạy học Toán 5, phiếu học tập nhóm."],
-      student: ["Bộ thực hành Toán 5, bảng con, nháp."]
+      teacher: ["Bộ đồ dùng trực quan Toán lớp 5 của giáo viên, phiếu bài tập nhóm."],
+      student: ["Phiếu học tập thực hành quy đồng phân số, thước kẻ có vạch chia."]
     },
     activities: [
       {
@@ -407,7 +407,7 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
     },
     materials: {
       teacher: ["Hình ảnh xói mòn đất, ruộng bậc thang, video ngắn về xói mòn đất."],
-      student: ["Giấy A3, bút dạ màu làm việc nhóm."]
+      student: ["Mẫu đất thực tế quan sát, phiếu ghi chép nhóm về biện pháp bảo vệ đất."]
     },
     activities: [
       {
@@ -463,7 +463,7 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
     },
     materials: {
       teacher: ["Hình ảnh Thomas Edison, hình ảnh chiếc bóng đèn sợi đốt đầu tiên."],
-      student: ["Sách giáo khoa Công nghệ 5."]
+      student: ["Tư liệu và tranh ảnh về các phát minh của Thomas Edison sưu tầm."]
     },
     activities: [
       {
@@ -492,6 +492,175 @@ export const SAMPLE_LESSON_PLANS: Record<string, LessonPlan> = {
 };
 
 export const CURRICULUM_GRADES: Grade[] = [1, 2, 3, 4, 5];
+
+/**
+ * Chuẩn hóa thiết bị dạy học và học liệu theo chuẩn CV 2345/BGDĐT:
+ * - Học sinh: Chỉ ghi những vật liệu, tài liệu, học liệu trực quan, phiếu học tập đặc thù CẦN THIẾT cho bài học.
+ *   KHÔNG ghi SGK, vở bài tập, bút dạ, bảng con, phấn/bút dạ, nháp, bộ đồ dùng học tập chung chung...
+ * - Giáo viên: Chỉ ghi những vật liệu, thiết bị dạy học, học liệu số và nội dung CẦN THIẾT từng môn.
+ *   KHÔNG ghi kế hoạch bài dạy, giáo án, sách giáo viên, sách giáo khoa...
+ */
+export function sanitizeLessonMaterials(
+  materials: { teacher?: string[]; student?: string[] } | undefined,
+  subject: string,
+  lessonTitle: string,
+  grade: number
+): { teacher: string[]; student: string[] } {
+  const studentForbiddenPattern = /sách\s*giáo\s*khoa|sgk|vở\s*bài\s*tập|vở\s*bt|vở\s*ghi|vở\s*thực\s*hành|vở\s*tập\s*viết|vở\s*ô\s*ly|bảng\s*con|phấn[\s\/]*bút\s*dạ|phấn\s*trắng|bút\s*dạ|bút\s*mực|bút\s*chì|bút\s*viết|bút\b|tẩy\s*gôm|gôm\s*tẩy|giấy\s*nháp|nháp\b|bộ\s*đồ\s*dùng\s*học\s*toán(\s*học\s*sinh)?|bộ\s*đồ\s*dùng\s*học\s*sinh|bộ\s*thực\s*hành\s*toán/i;
+  const teacherForbiddenPattern = /kế\s*hoạch\s*bài\s*dạy|giáo\s*án|sách\s*giáo\s*viên|sgv|sách\s*giáo\s*khoa|sgk/i;
+
+  const rawTeacher = materials?.teacher || [];
+  const rawStudent = materials?.student || [];
+
+  const cleanedTeacher: string[] = [];
+  rawTeacher.forEach((entry) => {
+    const items = entry.split(/[,;\n•]+/).map((s) => s.trim()).filter(Boolean);
+    const validItems = items.filter((item) => {
+      if (teacherForbiddenPattern.test(item)) return false;
+      return item.replace(/[^a-zA-ZÀ-ỹ0-9]/g, "").length >= 3;
+    });
+    if (validItems.length > 0) {
+      cleanedTeacher.push(validItems.join(", "));
+    }
+  });
+
+  const cleanedStudent: string[] = [];
+  rawStudent.forEach((entry) => {
+    const items = entry.split(/[,;\n•]+/).map((s) => s.trim()).filter(Boolean);
+    const validItems = items.filter((item) => {
+      if (studentForbiddenPattern.test(item)) return false;
+      return item.replace(/[^a-zA-ZÀ-ỹ0-9]/g, "").length >= 3;
+    });
+    if (validItems.length > 0) {
+      cleanedStudent.push(validItems.join(", "));
+    }
+  });
+
+  const subLower = (subject || "").toLowerCase();
+  let defaultTeacher: string[] = [];
+  let defaultStudent: string[] = [];
+
+  if (subLower.includes("toán")) {
+    defaultTeacher = [
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử tương tác minh họa bài: ${lessonTitle}.`,
+      `Bộ đồ dùng trực quan dạy Toán lớp ${grade} của GV (que tính lớn, bảng gài, mô hình khối hình học, tia số), phiếu bài tập mở rộng.`
+    ];
+    defaultStudent = [
+      `Phiếu học tập thực hành Toán, que tính và thẻ số/thẻ phép tính thực hành, thước kẻ có vạch chia.`
+    ];
+  } else if (subLower.includes("tiếng việt")) {
+    defaultTeacher = [
+      `Màn hình tương tác/máy chiếu trình chiếu bài giảng điện tử, video clip tư liệu và tranh ảnh phóng to minh họa bài "${lessonTitle}".`,
+      "Bảng phụ ghi sẵn đoạn văn/đoạn thơ cần luyện đọc diễn cảm, phiếu học tập thảo luận nhóm."
+    ];
+    defaultStudent = [
+      `Phiếu học tập rèn kĩ năng bài học, tranh ảnh hoặc tư liệu sưu tầm liên quan đến bài đọc/viết "${lessonTitle}".`
+    ];
+  } else if (subLower.includes("khoa học")) {
+    defaultTeacher = [
+      `Thiết bị trình chiếu bài giảng điện tử tương tác, video clip phóng sự khoa học/thực nghiệm về chủ đề "${lessonTitle}".`,
+      "Dụng cụ làm thí nghiệm trực quan mẫu của giáo viên, mẫu vật thật, phiếu học tập nhóm hướng dẫn các bước quan sát và ghi nhận dữ liệu."
+    ];
+    defaultStudent = [
+      "Mẫu vật thật phục vụ bài học (mẫu nước, lá cây, củ giống, mẩu sỏi đá...), cốc thủy tinh/dụng cụ quan sát trong suốt, phiếu ghi chép dữ liệu thực nghiệm."
+    ];
+  } else if (subLower.includes("lịch sử") || subLower.includes("địa lí") || subLower.includes("ls-đl")) {
+    defaultTeacher = [
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử đa phương tiện, đoạn phim tư liệu lịch sử/địa danh thực tế bài "${lessonTitle}".`,
+      "Bản đồ/lược đồ treo tường khổ lớn, tranh ảnh tư liệu lịch sử - địa lí mở rộng, phiếu giao việc cho các nhóm."
+    ];
+    defaultStudent = [
+      "Lược đồ/bản đồ học tập cá nhân, tranh ảnh hoặc tư liệu sưu tầm về nhân vật/di tích lịch sử hoặc địa danh, phiếu tìm hiểu kiến thức."
+    ];
+  } else if (subLower.includes("tự nhiên") || subLower.includes("tnxh")) {
+    defaultTeacher = [
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử đa phương tiện, video clip tư liệu thực tế phục vụ bài học "${lessonTitle}".`,
+      "Tranh ảnh phóng to kích thước lớn, phiếu học tập nhóm, các thẻ tình huống đóng vai an toàn thực tiễn."
+    ];
+    defaultStudent = [
+      "Mẫu vật/hình ảnh quan sát thực tế (hoa lá cây thật, tranh ảnh chụp góc học tập/gia đình), phiếu quan sát thực nghiệm và thẻ bày tỏ thái độ."
+    ];
+  } else if (subLower.includes("đạo đức")) {
+    defaultTeacher = [
+      `Máy chiếu/ti vi thông minh trình chiếu bài giảng điện tử tương tác, video clip tình huống đạo đức đời sống minh họa bài "${lessonTitle}".`,
+      "Thẻ mặt cười / mặt mếu (hoặc thẻ Xanh / Đỏ) dùng để bày tỏ thái độ, phiếu học tập tình huống."
+    ];
+    defaultStudent = [
+      "Thẻ bày tỏ thái độ (mặt cười / mặt mếu hoặc thẻ xanh / đỏ), phiếu xử lý tình huống thực tế cá nhân/nhóm, tranh ảnh gương người tốt việc tốt sưu tầm."
+    ];
+  } else if (subLower.includes("hoạt động trải nghiệm") || subLower.includes("hđtn")) {
+    defaultTeacher = [
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử tương tác, slide hình ảnh và video tư liệu theo chủ đề "${lessonTitle}".`,
+      "Hệ thống loa phát nhạc trò chơi, phiếu học tập nhóm, cây thông điệp hoặc bảng gài sản phẩm trải nghiệm."
+    ];
+    defaultStudent = [
+      "Vật liệu thủ công sáng tạo (giấy màu, bìa cứng, kéo an toàn, hồ dán), tranh ảnh/bưu thiếp tự sưu tầm, thẻ cảm xúc."
+    ];
+  } else if (subLower.includes("tin học")) {
+    defaultTeacher = [
+      "Phòng máy vi tính có kết nối mạng LAN an toàn, máy chiếu/ti vi màn hình lớn, bài giảng tương tác, phần mềm thực hành mô phỏng cài sẵn.",
+      "Tài liệu hướng dẫn an toàn thông tin số cho học sinh tiểu học, tệp dữ liệu mẫu để học sinh thực hành."
+    ];
+    defaultStudent = [
+      "Máy tính thực hành tại phòng máy, sổ ghi chép thao tác số và sơ đồ tư duy thực hành."
+    ];
+  } else if (subLower.includes("công nghệ")) {
+    defaultTeacher = [
+      "Thiết bị trình chiếu bài giảng điện tử, video clip thao tác kĩ thuật mẫu, mô hình sản phẩm công nghệ hoàn chỉnh của giáo viên.",
+      "Bộ dụng cụ lắp ghép mô hình mẫu, phiếu kiểm tra an toàn và quy trình thao tác."
+    ];
+    defaultStudent = [
+      "Bộ lắp ghép mô hình kỹ thuật/chi tiết thủ công thực hành, phiếu quy trình các bước thực hành lắp ráp an toàn."
+    ];
+  } else if (subLower.includes("âm nhạc")) {
+    defaultTeacher = [
+      "Đàn phím điện tử (Organ / Keyboard), micro giảng dạy, bài giảng điện tử tương tác.",
+      "Bộ nhạc cụ gõ: Thanh phách gõ, Song loan, Trống con, Tambourine chuẩn bị cho từng tổ."
+    ];
+    defaultStudent = [
+      "Thanh phách gõ (mỗi học sinh 1 cặp), nhạc cụ gõ tự chọn của tổ (song loan, tambourine, trống nhỏ).",
+      "Trang phục gọn gàng, sẵn sàng vận động phụ họa cơ thể."
+    ];
+  } else if (subLower.includes("mĩ thuật")) {
+    defaultTeacher = [
+      `Thiết bị trình chiếu hình ảnh tác phẩm mĩ thuật mẫu đặc sắc, tranh vẽ minh họa quy trình tạo hình bài "${lessonTitle}".`,
+      "Vật mẫu trực quan thật để học sinh quan sát, bảng pha màu và họa phẩm mẫu của giáo viên."
+    ];
+    defaultStudent = [
+      "Giấy vẽ A4/A3, sáp màu/màu nước, đất nặn tạo hình, kéo an toàn, hồ dán, vật liệu tự nhiên (lá khô, vỏ hạt, bìa carton) sáng tạo sản phẩm."
+    ];
+  } else if (subLower.includes("thể chất") || subLower.includes("gdtc") || subLower === "td") {
+    defaultTeacher = [
+      "Sân tập bằng phẳng sạch sẽ, còi chỉ huy, tranh ảnh kỹ thuật động tác, dụng cụ thể thao (bóng, dây nhảy, nấm chiến thuật)."
+    ];
+    defaultStudent = [
+      "Trang phục thể thao gọn gàng, giày bata đế mềm, khăn lau mồ hôi, bình nước uống cá nhân."
+    ];
+  } else if (subLower.includes("tiếng anh") || subLower.includes("english")) {
+    defaultTeacher = [
+      `Set of high-definition digital and physical flashcards for lesson: ${lessonTitle}.`,
+      "Authentic native audio recordings, interactive multimedia slides (PowerPoint/Canva).",
+      "Interactive flat panel / Smart TV, projector, external audio speaker, board magnets, and word strip cards."
+    ];
+    defaultStudent = [
+      "Individual mini word cards and character role-play badges for interactive pair-work and team games.",
+      "Speaking worksheet and activity cut-outs."
+    ];
+  } else {
+    defaultTeacher = [
+      `Màn hình trình chiếu bài giảng điện tử đa phương tiện, học liệu số và tranh ảnh tư liệu môn ${subject} bài "${lessonTitle}".`,
+      "Phiếu học tập nhóm, dụng cụ trực quan và phần thưởng khích lệ học sinh."
+    ];
+    defaultStudent = [
+      `Phiếu học tập thực hành môn ${subject}, đồ dùng trực quan cá nhân phục vụ thực hành bài học "${lessonTitle}".`
+    ];
+  }
+
+  return {
+    teacher: cleanedTeacher.length > 0 ? cleanedTeacher : defaultTeacher,
+    student: cleanedStudent.length > 0 ? cleanedStudent : defaultStudent,
+  };
+}
 
 /**
  * Generate full week Lesson Plans (KHBD) for all items in the schedule
@@ -587,10 +756,12 @@ export function generateFullWeekLessonPlans(
 
     if (sampleKey && SAMPLE_LESSON_PLANS[sampleKey]) {
       const sp = SAMPLE_LESSON_PLANS[sampleKey];
+      const cleanMats = sanitizeLessonMaterials(sp.materials, item.subject, item.lessonTitle, itemGrade);
       plans.push({
         ...sp,
         id: `plan-${item.id}-${idx}`,
         grade: itemGrade,
+        materials: cleanMats,
         week: schoolInfo.week,
         dayOfWeek: item.day,
         dateStr: item.dateStr || schoolInfo.startDate,
@@ -756,10 +927,12 @@ export function generateFullWeekLessonPlans(
             : undefined,
         }
       },
-      materials: {
-        teacher: teacherMaterials,
-        student: studentMaterials
-      },
+      materials: sanitizeLessonMaterials(
+        { teacher: teacherMaterials, student: studentMaterials },
+        item.subject,
+        item.lessonTitle,
+        itemGrade
+      ),
       activities: englishDetail ? englishDetail.activities : [
         {
           name: "1. Hoạt động Khởi động",

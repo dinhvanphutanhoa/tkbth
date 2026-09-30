@@ -66,11 +66,11 @@ export function getDetailedLessonActivities(params: {
     
     let specificCompetencies: string[] = [];
     let teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử tương tác (PPTX), bộ đồ dùng dạy học Toán lớp ${grade} (que tính, bảng gài, mô hình trực quan, thẻ số).`,
-      "Phiếu học tập nhóm, thước kẻ, bảng phụ ghi sẵn đề bài tập và bảng số liệu."
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử tương tác minh họa bài: ${lessonTitle}.`,
+      `Bộ đồ dùng trực quan dạy Toán lớp ${grade} của GV (que tính lớn, bảng gài, mô hình khối hình học, tia số), phiếu bài tập mở rộng.`
     ];
     let studentMaterials = [
-      `Sách giáo khoa Toán ${grade}, vở bài tập Toán, bộ đồ dùng học Toán học sinh, bảng con, phấn/bút dạ, nháp.`
+      `Phiếu học tập thực hành Toán, que tính và thẻ số/thẻ phép tính thực hành, thước kẻ có vạch chia.`
     ];
 
     if (grade === 1) {
@@ -216,11 +216,11 @@ export function getDetailedLessonActivities(params: {
       `Mở rộng vốn từ ngữ phong phú, biết vận dụng vào giao tiếp hàng ngày; cảm nhận được vẻ đẹp của ngôn ngữ tiếng Việt.`
     ];
     let teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX), tranh ảnh/video minh họa bài đọc "${titleCore}".`,
-      "Bảng phụ ghi sẵn đoạn văn/đoạn thơ cần luyện đọc diễn cảm, phiếu học tập nhóm."
+      `Màn hình tương tác/máy chiếu trình chiếu bài giảng điện tử, video clip tư liệu và tranh ảnh phóng to minh họa bài "${titleCore}".`,
+      "Bảng phụ ghi sẵn đoạn văn/đoạn thơ cần luyện đọc diễn cảm, phiếu học tập thảo luận nhóm."
     ];
     let studentMaterials = [
-      `Sách giáo khoa Tiếng Việt ${grade}, vở bài tập Tiếng Việt, vở ghi bài, bút mực, thước kẻ.`
+      `Phiếu học tập rèn kĩ năng bài học, tranh ảnh hoặc tư liệu sưu tầm liên quan đến bài đọc/viết "${titleCore}".`
     ];
 
     if (isReading) {
@@ -487,11 +487,11 @@ export function getDetailedLessonActivities(params: {
       "Biết cách chăm sóc sức khỏe, bảo vệ an toàn cho bản thân và thể hiện hành vi có trách nhiệm với môi trường sống xung quanh."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, slide bài giảng điện tử (PPTX), tranh ảnh/video thực tế về "${titleCore}".`,
-      "Phiếu học tập nhóm, các thẻ tình huống đóng vai an toàn thực tiễn."
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử đa phương tiện, video clip tư liệu thực tế về "${titleCore}".`,
+      "Tranh ảnh phóng to kích thước lớn, phiếu học tập nhóm, các thẻ tình huống đóng vai an toàn thực tiễn."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Tự nhiên và Xã hội ${grade}, vở bài tập, bút màu.`
+      "Mẫu vật/hình ảnh quan sát thực tế (hoa lá cây thật, tranh ảnh chụp góc học tập/gia đình), phiếu quan sát thực nghiệm và thẻ bày tỏ thái độ."
     ];
 
     const activities: LessonActivity[] = [
@@ -562,11 +562,11 @@ export function getDetailedLessonActivities(params: {
       "Rèn luyện phương pháp quan sát, thực nghiệm khoa học, tư duy logic và ý thức bảo vệ tài nguyên thiên nhiên, môi trường sống."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX), video clip thí nghiệm thực tế hoặc dụng cụ thí nghiệm trực quan về "${titleCore}".`,
-      "Phiếu học tập nhóm hướng dẫn các bước quan sát và ghi nhận dữ liệu thực nghiệm."
+      `Thiết bị trình chiếu bài giảng điện tử tương tác, video clip phóng sự khoa học/thực nghiệm về chủ đề "${titleCore}".`,
+      "Dụng cụ làm thí nghiệm trực quan mẫu của giáo viên, mẫu vật thật, phiếu học tập nhóm hướng dẫn các bước quan sát và ghi nhận dữ liệu."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Khoa học ${grade}, vở thực hành Khoa học, bút dạ, bảng nhóm.`
+      "Mẫu vật thật phục vụ bài học (mẫu nước, lá cây, củ giống, mẩu sỏi đá...), cốc thủy tinh/dụng cụ quan sát trong suốt, phiếu ghi chép dữ liệu thực nghiệm."
     ];
 
     const activities: LessonActivity[] = [
@@ -637,11 +637,11 @@ export function getDetailedLessonActivities(params: {
       "Biết khai thác lược đồ, bản đồ, tranh ảnh hiện vật lịch sử; bồi dưỡng lòng tự hào dân tộc và tình yêu quê hương đất nước."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX), bản đồ địa lí Việt Nam, lược đồ trận đánh/sự kiện lịch sử, tranh ảnh hiện vật.`,
-      "Phiếu học tập nhóm, tư liệu lịch sử - địa lí mở rộng."
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử đa phương tiện, đoạn phim tư liệu lịch sử/địa danh thực tế bài "${titleCore}".`,
+      "Bản đồ/lược đồ treo tường khổ lớn, tranh ảnh tư liệu lịch sử - địa lí mở rộng, phiếu giao việc cho các nhóm."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Lịch sử và Địa lí ${grade}, vở bài tập, thước kẻ, bút màu.`
+      "Lược đồ/bản đồ học tập cá nhân, tranh ảnh hoặc tư liệu sưu tầm về nhân vật/di tích lịch sử hoặc địa danh, phiếu tìm hiểu kiến thức."
     ];
 
     const activities: LessonActivity[] = [
@@ -711,11 +711,11 @@ export function getDetailedLessonActivities(params: {
       "Biết phân biệt hành vi đúng - sai, có thái độ đồng tình với điều tốt, không đồng tình với cái xấu; rèn luyện thói quen ứng xử văn minh trong trường học và gia đình."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, slide bài giảng điện tử (PPTX), tranh ảnh các tình huống đạo đức trong SGK.`,
+      `Máy chiếu/ti vi thông minh trình chiếu bài giảng điện tử tương tác, video clip tình huống đạo đức đời sống minh họa bài "${titleCore}".`,
       "Thẻ mặt cười / mặt mếu (hoặc thẻ Xanh / Đỏ) dùng để bày tỏ thái độ, phiếu học tập tình huống."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Đạo đức ${grade}, vở bài tập Đạo đức, thẻ bày tỏ ý kiến.`
+      "Thẻ bày tỏ thái độ (mặt cười / mặt mếu hoặc thẻ xanh / đỏ), phiếu xử lý tình huống thực tế cá nhân/nhóm, tranh ảnh gương người tốt việc tốt sưu tầm."
     ];
 
     const activities: LessonActivity[] = [
@@ -794,8 +794,7 @@ export function getDetailedLessonActivities(params: {
         `Chủ động, tự tin tham gia hoạt động trải nghiệm theo chủ đề dưới cờ: "${lessonTitle}"; nắm vững kế hoạch thi đua tuần mới của nhà trường và Liên đội.`
       ];
       const teacherMaterials = [
-        "Kế hoạch tuần, sổ theo dõi nền nếp lớp, bài phát động thi đua theo chủ đề tuần của Liên đội và BGH nhà trường.",
-        "Hệ thống âm thanh, micro, cờ Tổ quốc phục vụ nghi lễ Chào cờ."
+        "Hệ thống âm thanh, micro, cờ Tổ quốc, bục điều hành nghi lễ Chào cờ, kế hoạch phát động phong trào thi đua tuần mới."
       ];
       const studentMaterials = [
         "Trang phục học sinh chỉnh tề, sạch đẹp (áo đồng phục trắng, khăn quàng đỏ, bảng tên, mũ/ghế ngồi theo quy định)."
@@ -868,13 +867,11 @@ export function getDetailedLessonActivities(params: {
         `Rèn luyện năng lực tự quản, tự tin phát biểu ý kiến, nâng cao ý thức chấp hành luật giao thông đường bộ và lan tỏa nét đẹp văn hóa giao thông trong học đường.`
       ];
       const teacherMaterials = [
-        "Sổ chủ nhiệm, bảng tổng hợp điểm thi đua các tổ trong tuần, kế hoạch tuần học tiếp theo.",
-        `Tài liệu Giáo dục An toàn giao thông Lớp ${grade} (Bài ${tsLesson.lessonNumber}: ${tsLesson.title} - Tiết ${tsLesson.part}).`,
-        "Tranh ảnh, video clip tình huống giao thông thực tế phục vụ tích hợp bài học."
+        "Màn hình thông minh/máy chiếu trình chiếu video clip tình huống an toàn giao thông và tổng kết tuần học.",
+        `Tài liệu Giáo dục An toàn giao thông Lớp ${grade} (Bài ${tsLesson.lessonNumber}: ${tsLesson.title} - Tiết ${tsLesson.part}), tranh ảnh tình huống giao thông thực tế.`
       ];
       const studentMaterials = [
-        "Sổ theo dõi của ban cán sự lớp, sổ tay cá nhân, phiếu tự đánh giá rèn luyện.",
-        `Tài liệu Giáo dục An toàn giao thông Lớp ${grade}.`
+        "Sổ theo dõi của ban cán sự lớp, phiếu tự đánh giá rèn luyện cá nhân/tổ, thẻ ghi mục tiêu tuần mới."
       ];
 
       const activities: LessonActivity[] = [
@@ -935,11 +932,11 @@ export function getDetailedLessonActivities(params: {
       "Tự tin bày tỏ ý kiến, lắng nghe và hợp tác hiệu quả cùng bạn bè trong các hoạt động trải nghiệm thực tế."
     ];
     const teacherMaterials = [
-      `Kế hoạch bài dạy, bài giảng điện tử (PPTX), tranh ảnh/video minh họa chủ đề bài học "${titleCore}".`,
-      "Phiếu học tập nhóm, vật liệu trải nghiệm theo chủ đề."
+      `Màn hình thông minh/máy chiếu trình chiếu bài giảng điện tử tương tác, slide hình ảnh và video tư liệu theo chủ đề "${titleCore}".`,
+      "Hệ thống loa phát nhạc trò chơi, phiếu học tập nhóm, cây thông điệp hoặc bảng gài sản phẩm trải nghiệm."
     ];
     const studentMaterials = [
-      `Sách giáo khoa/vở bài tập Hoạt động trải nghiệm ${grade}, đồ dùng học tập, vật liệu thủ công.`
+      "Vật liệu thủ công sáng tạo (giấy màu, bìa cứng, kéo an toàn, hồ dán), tranh ảnh/bưu thiếp tự sưu tầm, thẻ cảm xúc."
     ];
 
     const activities: LessonActivity[] = [
@@ -994,11 +991,11 @@ export function getDetailedLessonActivities(params: {
       "Biết cách sử dụng thiết bị số an toàn, bảo vệ thông tin cá nhân trên môi trường mạng."
     ];
     const teacherMaterials = [
-      "Phòng máy vi tính, máy chiếu/ti vi màn hình lớn, bài giảng trực quan, phần mềm thực hành mô phỏng.",
-      "Tài liệu hướng dẫn an toàn thông tin số cho học sinh tiểu học."
+      "Phòng máy vi tính có kết nối mạng LAN an toàn, máy chiếu/ti vi màn hình lớn, bài giảng tương tác, phần mềm thực hành mô phỏng cài sẵn.",
+      "Tài liệu hướng dẫn an toàn thông tin số cho học sinh tiểu học, tệp dữ liệu mẫu để học sinh thực hành."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Tin học Lớp ${grade}, vở thực hành, máy tính thực hành.`
+      "Máy tính thực hành tại phòng máy, sổ ghi chép thao tác số và sơ đồ tư duy thực hành."
     ];
 
     const activities: LessonActivity[] = [
@@ -1048,10 +1045,11 @@ export function getDetailedLessonActivities(params: {
       "Phát triển tư duy công nghệ, kỹ năng khéo léo và ý thức tiết kiệm năng lượng, an toàn lao động (STEM)."
     ];
     const teacherMaterials = [
-      "Kế hoạch bài dạy, mô hình trực quan, thiết bị mẫu, video clip hướng dẫn thao tác an toàn."
+      "Thiết bị trình chiếu bài giảng điện tử, video clip thao tác kĩ thuật mẫu, mô hình sản phẩm công nghệ hoàn chỉnh của giáo viên.",
+      "Bộ dụng cụ lắp ghép mô hình mẫu, phiếu kiểm tra an toàn và quy trình thao tác."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Công nghệ Lớp ${grade}, bộ lắp ghép mô hình kỹ thuật / đồ dùng học tập.`
+      "Bộ lắp ghép mô hình kỹ thuật/chi tiết thủ công thực hành, phiếu quy trình các bước thực hành lắp ráp an toàn."
     ];
 
     const activities: LessonActivity[] = [
@@ -1099,10 +1097,10 @@ export function getDetailedLessonActivities(params: {
       "Hình thành thói quen rèn luyện thân thể hàng ngày, biết giữ vệ sinh cá nhân và sân tập an toàn."
     ];
     const teacherMaterials = [
-      "Sân tập sạch sẽ, an toàn, còi chỉ huy, tranh ảnh kỹ thuật động tác, dụng cụ thể thao (bóng, dây nhảy, nấm chiến thuật)."
+      "Sân tập bằng phẳng sạch sẽ, còi chỉ huy, tranh ảnh kỹ thuật động tác, dụng cụ thể thao (bóng, dây nhảy, nấm chiến thuật)."
     ];
     const studentMaterials = [
-      "Trang phục thể thao gọn gàng, giày tập sạch sẽ, nước uống cá nhân."
+      "Trang phục thể thao gọn gàng, giày bata đế mềm, khăn lau mồ hôi, bình nước uống cá nhân."
     ];
 
     const activities: LessonActivity[] = [
@@ -1170,10 +1168,11 @@ export function getDetailedLessonActivities(params: {
       "Sáng tạo sản phẩm mĩ thuật độc đáo từ các vật liệu quen thuộc, thân thiện với môi trường (STEM)."
     ];
     const teacherMaterials = [
-      "Kế hoạch bài dạy, tranh ảnh tác phẩm mĩ thuật mẫu, bài giảng điện tử tương tác, bảng pha màu."
+      `Thiết bị trình chiếu hình ảnh tác phẩm mĩ thuật mẫu đặc sắc, tranh vẽ minh họa quy trình tạo hình bài "${titleCore}".`,
+      "Vật mẫu trực quan thật để học sinh quan sát, bảng pha màu và họa phẩm mẫu của giáo viên."
     ];
     const studentMaterials = [
-      `Sách giáo khoa Mĩ thuật Lớp ${grade}, giấy vẽ A4, màu vẽ (sáp màu/dạ màu/màu nước), bút chì, tẩy, kéo, hồ dán.`
+      "Giấy vẽ A4/A3, sáp màu/màu nước, đất nặn tạo hình, kéo an toàn, hồ dán, vật liệu tự nhiên (lá khô, vỏ hạt, bìa carton) sáng tạo sản phẩm."
     ];
 
     const activities: LessonActivity[] = [
@@ -1230,10 +1229,11 @@ export function getDetailedLessonActivities(params: {
     "Phát triển năng lực tự chủ, hợp tác và giải quyết vấn đề linh hoạt trong thực tiễn."
   ];
   const teacherMaterials = [
-    `Kế hoạch bài dạy, bài giảng điện tử tương tác, tranh ảnh minh họa môn ${subject} lớp ${grade}.`
+    `Màn hình trình chiếu bài giảng điện tử đa phương tiện, học liệu số và tranh ảnh tư liệu môn ${subject} bài "${lessonTitle}".`,
+    "Phiếu học tập nhóm, dụng cụ trực quan và phần thưởng khích lệ học sinh."
   ];
   const studentMaterials = [
-    `Sách giáo khoa môn ${subject} lớp ${grade}, vở ghi bài, đồ dùng học tập cá nhân.`
+    `Phiếu học tập thực hành môn ${subject}, đồ dùng trực quan cá nhân phục vụ thực hành bài học "${lessonTitle}".`
   ];
 
   const activities: LessonActivity[] = [

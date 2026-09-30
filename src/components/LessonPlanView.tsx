@@ -39,6 +39,7 @@ import {
   getAuthenticDeckSummary
 } from "../utils/classroomSlideDataHelper";
 import { cleanLessonTitle, formatActivityName } from "../utils/lessonTitleHelper";
+import { sanitizeLessonMaterials } from "../data/curriculumData";
 
 interface LessonPlanViewProps {
   lessonPlans: LessonPlan[];
@@ -609,15 +610,25 @@ export const LessonPlanView: React.FC<LessonPlanViewProps> = ({
                           </div>
                         )}
 
-                        {/* II. Đồ dùng dạy học */}
-                        <div className="text-xs bg-stone-50 p-2.5 border border-stone-300 flex flex-col sm:flex-row gap-2">
-                          <div className="sm:w-1/2">
-                            <strong className="text-black">{isPlanEn ? "Teacher's Materials: " : "Đồ dùng GV: "}</strong> <span className="text-stone-700">{plan.materials?.teacher?.join("; ")}</span>
-                          </div>
-                          <div className="sm:w-1/2">
-                            <strong className="text-black">{isPlanEn ? "Students' Materials: " : "Đồ dùng HS: "}</strong> <span className="text-stone-700">{plan.materials?.student?.join("; ")}</span>
-                          </div>
-                        </div>
+                        {/* II. Thiết bị dạy học và học liệu (Chuẩn CV 2345/BGDĐT) */}
+                        {(() => {
+                          const sanitizedMats = sanitizeLessonMaterials(
+                            plan.materials,
+                            plan.subject,
+                            plan.lessonTitle,
+                            plan.grade
+                          );
+                          return (
+                            <div className="text-xs bg-stone-50 p-2.5 border border-stone-300 flex flex-col sm:flex-row gap-2">
+                              <div className="sm:w-1/2">
+                                <strong className="text-black">{isPlanEn ? "Teacher's Materials: " : "Thiết bị & Học liệu GV: "}</strong> <span className="text-stone-700">{sanitizedMats.teacher?.join("; ")}</span>
+                              </div>
+                              <div className="sm:w-1/2">
+                                <strong className="text-black">{isPlanEn ? "Students' Materials: " : "Vật liệu & Đồ dùng HS: "}</strong> <span className="text-stone-700">{sanitizedMats.student?.join("; ")}</span>
+                              </div>
+                            </div>
+                          );
+                        })()}
 
                         {/* III. Các hoạt động dạy học chủ yếu - Bảng 2 cột chuẩn HĐGV & HĐHS */}
                         <div className="border border-black overflow-x-auto bg-white">
@@ -996,20 +1007,30 @@ export const LessonPlanView: React.FC<LessonPlanViewProps> = ({
                 </div>
               </div>
 
-              {/* SECTION II: ĐỒ DÙNG DẠY HỌC */}
-              <div className="space-y-2 text-xs">
-                <h3 className="font-serif font-bold text-sm text-black border-b border-black pb-1 uppercase tracking-wide">
-                  {isEn ? "II. TEACHING AIDS & EQUIPMENT" : "II. ĐỒ DÙNG DẠY HỌC VÀ HỌC LIỆU"}
-                </h3>
-                <div className="space-y-1 pl-2">
-                  <p className="text-stone-800">
-                    <strong className="text-black">{isEn ? "- Teacher: " : "- Giáo viên: "}</strong> {activePlan.materials.teacher.join("; ")}
-                  </p>
-                  <p className="text-stone-800">
-                    <strong className="text-black">{isEn ? "- Students: " : "- Học sinh: "}</strong> {activePlan.materials.student.join("; ")}
-                  </p>
-                </div>
-              </div>
+              {/* SECTION II: THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU */}
+              {(() => {
+                const singleSanitizedMats = sanitizeLessonMaterials(
+                  activePlan.materials,
+                  activePlan.subject,
+                  activePlan.lessonTitle,
+                  activePlan.grade
+                );
+                return (
+                  <div className="space-y-2 text-xs">
+                    <h3 className="font-serif font-bold text-sm text-black border-b border-black pb-1 uppercase tracking-wide">
+                      {isEn ? "II. TEACHING AIDS & EQUIPMENT" : "II. THIẾT BỊ DẠY HỌC VÀ HỌC LIỆU"}
+                    </h3>
+                    <div className="space-y-1 pl-2">
+                      <p className="text-stone-800">
+                        <strong className="text-black">{isEn ? "- Teacher: " : "- Giáo viên: "}</strong> {singleSanitizedMats.teacher.join("; ")}
+                      </p>
+                      <p className="text-stone-800">
+                        <strong className="text-black">{isEn ? "- Students: " : "- Học sinh: "}</strong> {singleSanitizedMats.student.join("; ")}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })()}
 
               {/* SPECIAL MUSIC SECTION: NỘI DUNG & LỜI CA BÀI HÁT */}
               {(activePlan.songLyrics || activePlan.songTitle) && (
