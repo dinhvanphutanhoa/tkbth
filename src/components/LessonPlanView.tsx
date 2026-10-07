@@ -634,38 +634,32 @@ export const LessonPlanView: React.FC<LessonPlanViewProps> = ({
                         <div className="border border-black overflow-x-auto bg-white">
                           <table className="w-full text-xs border-collapse">
                             <thead>
-                              <tr className="bg-stone-100 border-b border-black text-black font-serif font-bold uppercase text-[10px] tracking-wider">
-                                <th className="py-2.5 px-3.5 text-center border-r border-black w-1/2 bg-stone-100">
+                              <tr className="bg-white border-b border-black text-black font-serif font-bold uppercase text-[10px] tracking-wider">
+                                <th className="py-2.5 px-3.5 text-center border-r border-black w-1/2 bg-white">
                                   {isPlanEn ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN"}
                                 </th>
-                                <th className="py-2.5 px-3.5 text-center w-1/2 bg-stone-100">
+                                <th className="py-2.5 px-3.5 text-center w-1/2 bg-white">
                                   {isPlanEn ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH"}
                                 </th>
                               </tr>
                             </thead>
-                            <tbody className="divide-y divide-black">
+                            <tbody>
                               {plan.activities?.map((act, ai) => (
-                                <React.Fragment key={ai}>
-                                  <tr className="bg-stone-100/90 border-b border-black">
-                                    <td colSpan={2} className="py-1.5 px-3 font-bold text-blue-950 text-xs tracking-wide bg-stone-100">
-                                      ★ {formatActivityName(act.name)}
-                                    </td>
-                                  </tr>
-                                  <tr className="hover:bg-stone-50/40">
-                                    <td className="w-1/2 py-2.5 px-3.5 align-top text-stone-900 border-r border-black text-[11px] leading-relaxed whitespace-pre-line font-serif">
-                                      <strong className="text-blue-900 block mb-1">
-                                        {isPlanEn ? "* Procedure: " : "* Cách tiến hành của GV: "}
-                                      </strong>
-                                      {act.teacherActivity}
-                                    </td>
-                                    <td className="w-1/2 py-2.5 px-3.5 align-top text-stone-900 text-[11px] leading-relaxed whitespace-pre-line font-serif">
-                                      <strong className="text-emerald-900 block mb-1">
-                                        {isPlanEn ? "* Students' Response: " : "* Hoạt động thực hiện của HS: "}
-                                      </strong>
-                                      {act.studentActivity}
-                                    </td>
-                                  </tr>
-                                </React.Fragment>
+                                <tr key={ai} className="hover:bg-stone-50/30">
+                                  <td className="w-1/2 py-2.5 px-3.5 align-top text-stone-900 border-r border-black text-[11px] leading-relaxed whitespace-pre-line font-serif">
+                                    <div className="font-bold text-black mb-1 text-xs">
+                                      {formatActivityName(act.name)}
+                                    </div>
+                                    <strong className="text-black block mb-0.5">
+                                      {isPlanEn ? "- Procedure: " : "- Cách tiến hành: "}
+                                    </strong>
+                                    {act.teacherActivity}
+                                  </td>
+                                  <td className="w-1/2 py-2.5 px-3.5 align-top text-stone-900 text-[11px] leading-relaxed whitespace-pre-line font-serif">
+                                    <div className="mb-1 text-xs select-none">&nbsp;</div>
+                                    {act.studentActivity}
+                                  </td>
+                                </tr>
                               ))}
                             </tbody>
                           </table>
@@ -1118,47 +1112,38 @@ export const LessonPlanView: React.FC<LessonPlanViewProps> = ({
                   </span>
                 </div>
 
-                <div className="overflow-x-auto border border-black">
+                <div className="overflow-x-auto border border-black bg-white">
                   <table className="w-full text-left border-collapse">
                     <thead>
-                      <tr className="bg-stone-100 text-black font-serif font-bold uppercase text-[11px] tracking-wider border-b border-black">
-                        <th className="py-2.5 px-4 border-r border-black w-1/2 text-center bg-stone-100">
-                          {isEn ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN (HĐGV)"}
+                      <tr className="bg-white text-black font-serif font-bold uppercase text-[11px] tracking-wider border-b border-black">
+                        <th className="py-2.5 px-4 border-r border-black w-1/2 text-center bg-white">
+                          {isEn ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN"}
                         </th>
-                        <th className="py-2.5 px-4 w-1/2 text-center bg-stone-100">
-                          {isEn ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH (HĐHS)"}
+                        <th className="py-2.5 px-4 w-1/2 text-center bg-white">
+                          {isEn ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH"}
                         </th>
                       </tr>
                     </thead>
-                    <tbody className="divide-y divide-black">
+                    <tbody>
                       {(isEditing && editFormData ? editFormData.activities : activePlan.activities).map((act, actIdx) => (
-                        <React.Fragment key={act.id || actIdx}>
-                          <tr className="bg-stone-100 border-b border-black">
-                            <td colSpan={2} className="py-2 px-4 font-bold text-blue-950 text-xs uppercase tracking-wide bg-stone-100">
-                              <div className="flex items-center justify-between gap-2 flex-wrap">
-                                <span>★ {formatActivityName(act.name)}</span>
-                                {isEditing && (
-                                  <div className="flex items-center gap-2">
-                                    <span className="text-[10px] text-stone-600 font-normal normal-case">Tên hoạt động:</span>
-                                    <input
-                                      type="text"
-                                      value={act.name}
-                                      onChange={(e) => handleActivityChange(actIdx, "name", e.target.value)}
-                                      className="px-2 py-0.5 text-xs bg-white border border-stone-400 font-medium text-stone-900 w-56 focus:outline-none focus:border-black"
-                                      placeholder="Tên hoạt động..."
-                                    />
-                                  </div>
-                                )}
-                              </div>
-                            </td>
-                          </tr>
-                          <tr className="bg-white hover:bg-stone-50/60 divide-x divide-black">
-                            {/* Teacher Column */}
-                            <td className="w-1/2 py-3 px-4 border-r border-black align-top space-y-2">
-                              {isEditing ? (
+                        <tr key={act.id || actIdx} className="bg-white hover:bg-stone-50/30">
+                          {/* Teacher Column */}
+                          <td className="w-1/2 py-3 px-4 border-r border-black align-top space-y-1.5">
+                            {isEditing ? (
+                              <div className="space-y-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="text-[11px] font-bold text-black shrink-0">Tên hoạt động:</span>
+                                  <input
+                                    type="text"
+                                    value={act.name}
+                                    onChange={(e) => handleActivityChange(actIdx, "name", e.target.value)}
+                                    className="px-2 py-1 text-xs bg-white border border-stone-400 font-bold text-black w-full focus:outline-none focus:border-black"
+                                    placeholder="Tên hoạt động..."
+                                  />
+                                </div>
                                 <div className="space-y-1">
-                                  <label className="text-[11px] font-bold text-blue-900 block">
-                                    {isEn ? "* Teacher's Procedure (HĐGV):" : "* Cách tiến hành của GV (HĐGV):"}
+                                  <label className="text-[11px] font-bold text-black block">
+                                    {isEn ? "- Procedure:" : "- Cách tiến hành:"}
                                   </label>
                                   <textarea
                                     rows={7}
@@ -1168,42 +1153,43 @@ export const LessonPlanView: React.FC<LessonPlanViewProps> = ({
                                     placeholder={isEn ? "Enter teacher's procedure..." : "Nhập cách tiến hành của giáo viên..."}
                                   />
                                 </div>
-                              ) : (
-                                <div className="text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif">
-                                  <strong className="text-blue-900 block mb-1">
-                                    {isEn ? "* Procedure: " : "* Cách tiến hành của GV: "}
-                                  </strong>
-                                  {act.teacherActivity}
+                              </div>
+                            ) : (
+                              <div className="text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif">
+                                <div className="font-bold text-black mb-1">
+                                  {formatActivityName(act.name)}
                                 </div>
-                              )}
-                            </td>
+                                <strong className="text-black block mb-0.5">
+                                  {isEn ? "- Procedure: " : "- Cách tiến hành: "}
+                                </strong>
+                                {act.teacherActivity}
+                              </div>
+                            )}
+                          </td>
 
-                            {/* Student Column */}
-                            <td className="w-1/2 py-3 px-4 align-top text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif space-y-2">
-                              {isEditing ? (
-                                <div className="space-y-1">
-                                  <label className="text-[11px] font-bold text-emerald-900 block">
-                                    {isEn ? "* Students' Execution & Response (HĐHS):" : "* Hoạt động thực hiện của HS (HĐHS):"}
-                                  </label>
-                                  <textarea
-                                    rows={7}
-                                    value={act.studentActivity}
-                                    onChange={(e) => handleActivityChange(actIdx, "studentActivity", e.target.value)}
-                                    className="w-full text-xs p-2.5 border border-stone-400 font-serif leading-relaxed focus:outline-none focus:border-black bg-stone-50"
-                                    placeholder={isEn ? "Enter students' activities..." : "Nhập hoạt động của học sinh..."}
-                                  />
-                                </div>
-                              ) : (
-                                <div className="text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif">
-                                  <strong className="text-emerald-900 block mb-1">
-                                    {isEn ? "* Students' Execution & Response:" : "* Hoạt động thực hiện của HS:"}
-                                  </strong>
-                                  {act.studentActivity}
-                                </div>
-                              )}
-                            </td>
-                          </tr>
-                        </React.Fragment>
+                          {/* Student Column */}
+                          <td className="w-1/2 py-3 px-4 align-top text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif space-y-1.5">
+                            {isEditing ? (
+                              <div className="space-y-1 pt-7">
+                                <label className="text-[11px] font-bold text-black block">
+                                  {isEn ? "- Students' Activities:" : "- Hoạt động của học sinh:"}
+                                </label>
+                                <textarea
+                                  rows={7}
+                                  value={act.studentActivity}
+                                  onChange={(e) => handleActivityChange(actIdx, "studentActivity", e.target.value)}
+                                  className="w-full text-xs p-2.5 border border-stone-400 font-serif leading-relaxed focus:outline-none focus:border-black bg-stone-50"
+                                  placeholder={isEn ? "Enter students' activities..." : "Nhập hoạt động của học sinh..."}
+                                />
+                              </div>
+                            ) : (
+                              <div className="text-stone-900 leading-relaxed whitespace-pre-line text-xs font-serif">
+                                <div className="mb-1 select-none">&nbsp;</div>
+                                {act.studentActivity}
+                              </div>
+                            )}
+                          </td>
+                        </tr>
                       ))}
                     </tbody>
                   </table>

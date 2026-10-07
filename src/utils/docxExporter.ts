@@ -1803,7 +1803,7 @@ export function buildSingleLessonPlanDocxElements(
         new TextRun({
           text: isEnPlan ? "III. TEACHING AND LEARNING PROCEDURES" : "III. CÁC HOẠT ĐỘNG DẠY HỌC CHỦ YẾU",
           bold: true,
-          color: "0F172A",
+          color: "000000",
           font,
           size: baseSize,
         }),
@@ -1817,7 +1817,9 @@ export function buildSingleLessonPlanDocxElements(
       children: [
         new TableCell({
           width: { size: colHalfWidth, type: WidthType.DXA },
-          shading: { fill: "1E3A8A" },
+          borders: {
+            bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          },
           children: [
             new Paragraph({
               alignment: AlignmentType.CENTER,
@@ -1825,7 +1827,7 @@ export function buildSingleLessonPlanDocxElements(
                 new TextRun({
                   text: isEnPlan ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN",
                   bold: true,
-                  color: "FFFFFF",
+                  color: "000000",
                   font,
                   size: baseSize,
                 }),
@@ -1835,7 +1837,9 @@ export function buildSingleLessonPlanDocxElements(
         }),
         new TableCell({
           width: { size: colHalfWidth, type: WidthType.DXA },
-          shading: { fill: "1E3A8A" },
+          borders: {
+            bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          },
           children: [
             new Paragraph({
               alignment: AlignmentType.CENTER,
@@ -1843,7 +1847,7 @@ export function buildSingleLessonPlanDocxElements(
                 new TextRun({
                   text: isEnPlan ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH",
                   bold: true,
-                  color: "FFFFFF",
+                  color: "000000",
                   font,
                   size: baseSize,
                 }),
@@ -1859,12 +1863,12 @@ export function buildSingleLessonPlanDocxElements(
     const formattedActName = formatActivityName(act.name);
     const teacherParagraphs: Paragraph[] = [
       new Paragraph({
-        spacing: { after: 30 },
+        spacing: { before: 80, after: 30 },
         children: [
           new TextRun({
             text: formattedActName,
             bold: true,
-            color: "1E40AF",
+            color: "000000",
             font,
             size: baseSize,
           }),
@@ -1874,6 +1878,10 @@ export function buildSingleLessonPlanDocxElements(
     ];
 
     const studentParagraphs: Paragraph[] = [
+      new Paragraph({
+        spacing: { before: 80, after: 30 },
+        children: [new TextRun({ text: "", font, size: baseSize })],
+      }),
       ...createActivityCellParagraphs(act.studentActivity, font, baseSize),
     ];
 
@@ -1882,10 +1890,18 @@ export function buildSingleLessonPlanDocxElements(
         children: [
           new TableCell({
             width: { size: colHalfWidth, type: WidthType.DXA },
+            borders: {
+              top: { style: BorderStyle.NONE, size: 0, color: "auto" },
+              bottom: { style: BorderStyle.NONE, size: 0, color: "auto" },
+            },
             children: teacherParagraphs,
           }),
           new TableCell({
             width: { size: colHalfWidth, type: WidthType.DXA },
+            borders: {
+              top: { style: BorderStyle.NONE, size: 0, color: "auto" },
+              bottom: { style: BorderStyle.NONE, size: 0, color: "auto" },
+            },
             children: studentParagraphs,
           }),
         ],
@@ -1896,6 +1912,14 @@ export function buildSingleLessonPlanDocxElements(
   elements.push(
     new Table({
       width: { size: tableWidth, type: WidthType.DXA },
+      borders: {
+        top: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+        bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+        left: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+        right: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+        insideHorizontal: { style: BorderStyle.NONE, size: 0, color: "auto" },
+        insideVertical: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+      },
       rows: activityTableRows,
     })
   );
@@ -2541,28 +2565,45 @@ export async function exportCombinedAllInOneDocx(
 
     // III. Các hoạt động
     docChildren.push(new Paragraph({ text: "", spacing: { before: 60 } }));
-    docChildren.push(new Paragraph({ children: [new TextRun({ text: isEnPlan ? "III. TEACHING AND LEARNING PROCEDURES" : "III. CÁC HOẠT ĐỘNG DẠY HỌC CHỦ YẾU", bold: true, font, size: baseSize })] }));
+    docChildren.push(new Paragraph({ children: [new TextRun({ text: isEnPlan ? "III. TEACHING AND LEARNING PROCEDURES" : "III. CÁC HOẠT ĐỘNG DẠY HỌC CHỦ YẾU", bold: true, color: "000000", font, size: baseSize })] }));
 
     const activityRows: TableRow[] = [
       new TableRow({
         tableHeader: true,
         children: [
-          new TableCell({ width: { size: colHalfWidth, type: WidthType.DXA }, shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: isEnPlan ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN (HĐGV)", bold: true, color: "FFFFFF", font, size: baseSize })] })] }),
-          new TableCell({ width: { size: colHalfWidth, type: WidthType.DXA }, shading: { fill: "1E3A8A" }, children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: isEnPlan ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH (HĐHS)", bold: true, color: "FFFFFF", font, size: baseSize })] })] }),
+          new TableCell({
+            width: { size: colHalfWidth, type: WidthType.DXA },
+            borders: {
+              bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+            },
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: isEnPlan ? "TEACHER'S ACTIVITIES (T)" : "HOẠT ĐỘNG CỦA GIÁO VIÊN", bold: true, color: "000000", font, size: baseSize })] })],
+          }),
+          new TableCell({
+            width: { size: colHalfWidth, type: WidthType.DXA },
+            borders: {
+              bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+            },
+            children: [new Paragraph({ alignment: AlignmentType.CENTER, children: [new TextRun({ text: isEnPlan ? "STUDENTS' ACTIVITIES (Ss)" : "HOẠT ĐỘNG CỦA HỌC SINH", bold: true, color: "000000", font, size: baseSize })] })],
+          }),
         ],
       }),
     ];
 
     plan.activities.forEach((act) => {
+      const formattedActName = formatActivityName(act.name);
       const teacherParagraphs: Paragraph[] = [
         new Paragraph({
-          spacing: { after: 30 },
-          children: [new TextRun({ text: act.name, bold: true, color: "1E40AF", font, size: baseSize })],
+          spacing: { before: 80, after: 30 },
+          children: [new TextRun({ text: formattedActName, bold: true, color: "000000", font, size: baseSize })],
         }),
         ...createActivityCellParagraphs(act.teacherActivity, font, baseSize, isEnPlan ? "- Procedure:" : "- Cách tiến hành:")
       ];
 
       const studentParagraphs: Paragraph[] = [
+        new Paragraph({
+          spacing: { before: 80, after: 30 },
+          children: [new TextRun({ text: "", font, size: baseSize })],
+        }),
         ...createActivityCellParagraphs(act.studentActivity, font, baseSize)
       ];
 
@@ -2571,10 +2612,18 @@ export async function exportCombinedAllInOneDocx(
           children: [
             new TableCell({
               width: { size: colHalfWidth, type: WidthType.DXA },
+              borders: {
+                top: { style: BorderStyle.NONE, size: 0, color: "auto" },
+                bottom: { style: BorderStyle.NONE, size: 0, color: "auto" },
+              },
               children: teacherParagraphs,
             }),
             new TableCell({
               width: { size: colHalfWidth, type: WidthType.DXA },
+              borders: {
+                top: { style: BorderStyle.NONE, size: 0, color: "auto" },
+                bottom: { style: BorderStyle.NONE, size: 0, color: "auto" },
+              },
               children: studentParagraphs,
             }),
           ],
@@ -2582,7 +2631,20 @@ export async function exportCombinedAllInOneDocx(
       );
     });
 
-    docChildren.push(new Table({ width: { size: tableWidth, type: WidthType.DXA }, rows: activityRows }));
+    docChildren.push(
+      new Table({
+        width: { size: tableWidth, type: WidthType.DXA },
+        borders: {
+          top: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          bottom: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          left: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          right: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+          insideHorizontal: { style: BorderStyle.NONE, size: 0, color: "auto" },
+          insideVertical: { style: BorderStyle.SINGLE, size: 6, color: "000000" },
+        },
+        rows: activityRows,
+      })
+    );
 
     // IV. Điều chỉnh
     docChildren.push(new Paragraph({ text: "", spacing: { before: 60 } }));

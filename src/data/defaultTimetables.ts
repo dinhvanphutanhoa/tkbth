@@ -5,6 +5,7 @@ import { getDetailedEnglishLesson } from "./englishLessonDetails";
 import { getGradeCurriculumLesson } from "./gradeCurriculums";
 import { cleanLessonTitle } from "../utils/lessonTitleHelper";
 import { getTrafficSafetyLesson } from "./trafficSafetyCurriculum";
+import { getGNRRTHLesson } from "./gnrrthCurriculum";
 
 export interface TeacherInfo {
   id: string;
@@ -871,11 +872,13 @@ export function mapRawSubjectToScheduleItem(
     note = "Sinh hoạt cuối tuần";
     const info = getGradeCurriculumLesson(gradeNum, "hoạt động trải nghiệm", week, 3);
     const trafficLesson = getTrafficSafetyLesson(gradeNum, week);
-    // Ghép nội dung ATGT vào tiết HĐTN (SHL): mỗi lớp 10 bài, 1 bài dạy 2 tiết vào tiết HĐTN(SHL) trong 2 tuần
+    const gnrrthLesson = getGNRRTHLesson(gradeNum, week);
+    // Ghép nội dung ATGT và GNRRTH (từ tuần 6) vào tiết HĐTN (SHL)
     const cleanTheme = info.lessonTitle.replace(/^sinh\s+hoạt\s+lớp\s*[:–-]?\s*/i, "").trim();
-    lessonTitle = `Sinh hoạt lớp: ${cleanTheme.toUpperCase()} & AN TOÀN GIAO THÔNG (${trafficLesson.title})`;
+    const gnrrthPrefix = gnrrthLesson ? `GNRRTH: ${gnrrthLesson.title} | ` : "";
+    lessonTitle = `${gnrrthPrefix}Sinh hoạt lớp: ${cleanTheme.toUpperCase()} & AN TOÀN GIAO THÔNG (${trafficLesson.title})`;
     curriculumPeriod = info.curriculumPeriod;
-    integrationNotes = `Tích hợp An toàn giao thông: ${trafficLesson.title} - ${trafficLesson.subTitle}; KNS, Quản lý cảm xúc, Tự đánh giá nề nếp`;
+    integrationNotes = `${gnrrthLesson ? `Tích hợp GNRRTH: ${gnrrthLesson.title} - ${gnrrthLesson.subTitle}; ` : ""}Tích hợp An toàn giao thông: ${trafficLesson.title} - ${trafficLesson.subTitle}; KNS, Quản lý cảm xúc, Tự đánh giá nề nếp`;
   } 
   // 8c. Hoạt động giáo dục theo chủ đề
   else if (clean.includes("HĐTN") || clean.includes("HDTN") || clean.toLowerCase().includes("trải nghiệm")) {

@@ -3,7 +3,8 @@ import { getDetailedMusicLesson } from "./musicLessonDetails";
 import { getOfficialMusicLesson } from "./musicCurriculumOfficial";
 import { getDetailedEnglishLesson } from "./englishLessonDetails";
 import { getDetailedLessonActivities } from "./detailedActivitiesGenerator";
-import { cleanLessonTitle } from "../utils/lessonTitleHelper";
+import { cleanLessonTitle, formatActivityName } from "../utils/lessonTitleHelper";
+import { getGNRRTHLesson } from "./gnrrthCurriculum";
 
 export interface SubjectCurriculum {
   subject: string;
@@ -733,6 +734,63 @@ export function generateFullWeekLessonPlans(
 
     const itemGrade = (parseInt(item.className.charAt(0)) as Grade) || schoolInfo.grade || 5;
 
+    // Bổ sung tài liệu GNRRTH vào Thứ Sáu hàng tuần trước tiết HĐTN (SHL) bắt đầu từ tuần thứ 6
+    const isFridaySHL =
+      item.day === "Thứ Sáu" &&
+      (item.subSubject?.toLowerCase().includes("sinh hoạt lớp") ||
+        item.lessonTitle?.toLowerCase().includes("sinh hoạt lớp") ||
+        item.subject.toLowerCase().includes("shl") ||
+        (item.subject.toLowerCase().includes("hđtn") && item.period >= 3));
+
+    if (isFridaySHL && Number(schoolInfo.week) >= 6) {
+      const gnrrth = getGNRRTHLesson(itemGrade, Number(schoolInfo.week));
+      if (gnrrth) {
+        plans.push({
+          id: `plan-gnrrth-${item.id}-${idx}`,
+          grade: itemGrade,
+          subject: "TÀI LIỆU GNRRTH",
+          subSubject: "Giáo dục Giảm nhẹ rủi ro thiên tai (Trước tiết HĐTN - SHL)",
+          lessonTitle: `BÀI ${gnrrth.lessonNumber} (TIẾT ${gnrrth.part}): ${gnrrth.title.toUpperCase()} - ${gnrrth.subTitle.toUpperCase()}`,
+          session: item.session,
+          timetablePeriod: Math.max(0.5, Number(item.period || 4) - 0.1),
+          periodNumber: currentPeriodInDay,
+          curriculumPeriod: `GNRRTH-${Number(schoolInfo.week) - 5}`,
+          week: schoolInfo.week,
+          dayOfWeek: item.day,
+          dateStr: item.dateStr || schoolInfo.startDate,
+          teacherName: schoolInfo.teacherName,
+          className: item.className || schoolInfo.className,
+          schoolName: schoolInfo.schoolName,
+          departmentName: schoolInfo.departmentName,
+          branchName: schoolInfo.branchName,
+          objectives: {
+            specificCompetencies: [gnrrth.specificCompetency],
+            generalCompetencies: [
+              "Năng lực tự chủ và tự học: Chủ động nhận diện nguy cơ thiên tai và tự giác thực hiện các biện pháp phòng tránh an toàn cho bản thân.",
+              "Năng lực giao tiếp và hợp tác: Trao đổi nhóm, chia sẻ thông tin cảnh báo và phối hợp xử lý tình huống ứng phó thiên tai.",
+              "Năng lực giải quyết vấn đề và sáng tạo: Vận dụng kỹ năng phòng chống thiên tai vào thực tiễn đời sống tại gia đình và địa phương."
+            ],
+            qualities: [
+              "Trách nhiệm: Có ý thức bảo vệ môi trường, tiết kiệm tài nguyên và chấp hành quy định an toàn trường học.",
+              "Nhân ái: Biết quan tâm, chia sẻ, hỗ trợ bạn bè và mọi người xung quanh khi gặp khó khăn do thời tiết, thiên tai."
+            ],
+            integrations: {
+              environment: "Giáo dục Bảo vệ môi trường & Ứng phó biến đổi khí hậu: Trồng và bảo vệ cây xanh, giữ gìn nguồn nước sạch.",
+              lifeSkills: `Kỹ năng sống (GNRRTH): ${gnrrth.subTitle}.`
+            }
+          },
+          materials: sanitizeLessonMaterials(
+            { teacher: gnrrth.teacherMaterials, student: gnrrth.studentMaterials },
+            "Tự nhiên và Xã hội",
+            gnrrth.title,
+            itemGrade
+          ),
+          activities: gnrrth.activities,
+          postLessonAdjustment: "..........................................................................................................................................................................."
+        });
+      }
+    }
+
     const subLowerCheck = item.subject.toLowerCase();
     const isSpecialSubject = subLowerCheck.includes("tiếng anh") || subLowerCheck.includes("anh văn") || subLowerCheck.includes("ta") || subLowerCheck.includes("âm nhạc") || subLowerCheck.includes("an");
 
@@ -935,22 +993,22 @@ export function generateFullWeekLessonPlans(
       ),
       activities: englishDetail ? englishDetail.activities : [
         {
-          name: "1. Hoạt động Khởi động",
+          name: "1. Hoạt động mở đầu (5 phút)",
           teacherActivity: act1Teacher,
           studentActivity: act1Student
         },
         {
-          name: "2. Hoạt động Khám phá",
+          name: "2. Hoạt động hình thành kiến thức (12 phút)",
           teacherActivity: act2Teacher,
           studentActivity: act2Student
         },
         {
-          name: "3. Hoạt động Luyện tập - Thực hành",
+          name: "3. Hoạt động luyện tập thực hành (15 phút)",
           teacherActivity: act3Teacher,
           studentActivity: act3Student
         },
         {
-          name: "4. Hoạt động Vận dụng",
+          name: "4. Hoạt động vận dụng trải nghiệm (3 phút)",
           teacherActivity: act4Teacher,
           studentActivity: act4Student
         }
